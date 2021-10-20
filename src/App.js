@@ -1,24 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
-
+import Master from './component/Master/Master';
+import Temp from './component/temp';
+import HomeHOC from './HOC/Home.HOC';
+import RestaurantHOC from './HOC/RestaurantHOC';
+import RestaurantMaster from "./component/Master/RestaurantMaster";
+import Login from './component/login/index'
+import Signup from './component/signup/index'
+import SignupApi from './Context-Api/signup';
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <HomeHOC path="/" exact component={Temp} />
+      <HomeHOC key="home" path="/home/:type" exact component={Master} />
+      <RestaurantHOC key="restaurant" path="/restaurant/:type" exact component={RestaurantMaster} />
+    
+      <SignupApi>
+            <Login/>
+            <Signup />
+      </SignupApi>
+    </>
   );
 }
 
