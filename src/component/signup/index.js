@@ -5,32 +5,64 @@ import { FcGoogle } from "react-icons/fc"
 import { AiOutlineClose } from "react-icons/ai";
 
 
+
 export default function Signup() {
   const [open, setOpen] = useContext(SignupContext);
   
 
   const cancelButtonRef = useRef(null)
-
+  const [status, setStatus] = useState("user");
   const [bgColor, setBgColor] = useState("gray-300")
   const [cursor, setCursor] = useState("not-allowed")
   const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
+  const [pass, setpass] = useState("")
   const fName=(e)=>{
     setName(e.target.value)
 }
-  const fEmail=(e)=>{
-    setEmail(e.target.value)
+  const fpass=(e)=>{
+    setpass(e.target.value)
+  }
+  
+
+  const AsUser=()=>{
+    return(
+      <>
+      <form className="my-6">
+                          <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={fName}/>
+                          <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={fpass}/>
+                        </form>
+      </>
+  
+    )
+  }
+  const AsRetauranant=()=>{
+    return(
+      <>
+                          <form className="my-6">
+                          <input placeholder="Restaurant Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={fName}/>
+                          <input placeholder="pass" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={fpass}/>
+                        </form>
+      </>
+  
+    )
+  }
+
+  const handleSignUpAsUser=()=>{
+    setStatus("user");
+  }
+  const handleSignUpAsRestaurant=()=>{
+    setStatus("restaurant");
   }
 
   useEffect(() => {
-    if(name.length>5 && email.length>10 && email.includes("@")){
+    if(name.length>5 && pass.length>10 && pass.includes("@")){
         setBgColor("red-500")
         setCursor("pointer")
     }else{
         setBgColor("gray-300")
         setCursor("not-allowed")
     }
-  }, [name, email])
+  }, [name, pass])
 
 
   return (
@@ -76,10 +108,19 @@ export default function Signup() {
                   ref={cancelButtonRef}><AiOutlineClose className="w-6"/></button>
                     </div>
                     <div className="mt-2 text-center">
-                      <form className="my-6">
-                        <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={fName}/>
-                        <input placeholder="Email" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={fEmail}/>
-                      </form>
+                          <div className="flex justify-between">
+                            <button onClick={handleSignUpAsUser} className="bg-red-500 w-max md:w-1/3 rounded-lg p-4 text-white text-sm lg:text-lg" >Sign up as User</button>
+                            <button onClick={handleSignUpAsRestaurant} className="bg-red-500 w-max md:w-1/3 rounded-lg p-4 text-white text-sm lg:text-lg" >Sign up as Restaurant</button>
+                            </div>                  
+
+                      {
+                        status==="user"&&
+                        <AsUser/>
+                      }
+                      {
+                        status==="restaurant"&&
+                        <AsRetauranant/>
+                      }
                       <button className={`border border-gray-300 font-semibold w-full h-12 bg-${bgColor} cursor-${cursor}`}>Create Account</button>
                       <p className="m-4 font-dark text-xl">Or</p>
                       <div className="flex justify-center">

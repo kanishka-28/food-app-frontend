@@ -13,16 +13,13 @@ const MobileNav = () => {
         <div className="p-4 md:hidden flex items-center justify-between w-full ">
             <Link to="/">
                 <div className="w-28">
-                    <img className="w-full h-full" src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png" alt="logo" />
+                    <img className="w-full h-full" src="https://www.enukesoftware.com/blog/wp-content/uploads/2020/01/food-delivery-app-smartphone-with-foods-banner_40816-701.jpg" alt="logo" />
                 </div>
             </Link>
             <div className="flex items-center gap-3" >
                 <button className="bg-zomato-400 text-white py-2 px-3 rounded-full">
-                    Use App
+                      <BiUser />
             </button>
-                <span className="border p-2 border-blue-300 text-blue-400 rounded-full">
-                    <BiUser />
-                </span>
             </div>
         </div>
     )
@@ -37,8 +34,8 @@ const LgNav = () => {
         <div className="flex items-center py-4 justify-around w-full text-gray-400 hidden md:flex ">
             <div className="flex justify-around w-9/12 items-center">
                 <Link to="/">
-                    <div className="w-24 h-6">
-                        <img className="w-full h-full" src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png" alt="logo" />
+                    <div className="w-24 h-12">
+                        <img className="w-full h-full" src="https://www.enukesoftware.com/blog/wp-content/uploads/2020/01/food-delivery-app-smartphone-with-foods-banner_40816-701.jpg" alt="logo" />
                     </div>
                 </Link>
                 <div className="flex bg-white items-center px-2 gap-3 shadow-md">
