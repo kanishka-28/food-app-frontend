@@ -3,10 +3,11 @@ import { Dialog, Transition } from '@headlessui/react'
 import { SignupContext } from "../../context/signup";
 import { FcGoogle } from "react-icons/fc"
 import { AiOutlineClose } from "react-icons/ai";
+import { addrest, signupApi } from '../../services/api';
+import { useHistory } from 'react-router';
 
 export default function Signup() {
-  const {open, setOpen} = useContext(SignupContext);
-
+  const {open, setOpen,loginOpen, setLoginOpen,loggedIn, setloggedIn } = useContext(SignupContext);
   const cancelButtonRef = useRef(null)
   const [status, setStatus] = useState("user");
   const [bgColor, setBgColor] = useState("gray-300")
@@ -27,7 +28,9 @@ export default function Signup() {
   const [oname, setoname] = useState("")
   const [opass, setopass] = useState("")
   const [oemail, setoemail] = useState("")
-
+  const [latit, setlatit] = useState("")
+  const [longi, setlongi] = useState("")
+  const history = useHistory();
   const uName = (e) => {
     setuname(e.target.value)
   }
@@ -65,22 +68,75 @@ export default function Signup() {
   const oEmail = (e) => {
     setoemail(e.target.value)
   }
-
-
-
-    const handleSignUpAsUser = () => {
-      setStatus("user");
-      setdisplayuser("block")
-      setdisplayrest("hidden")
-      setuserbtn("megenta-500")
-      setresbtn("megenta-400")
-    }
-    const handleSignUpAsRestaurant = () => {
-      setStatus("restaurant");
-      setdisplayrest("block")
-      setdisplayuser("hidden")
-      setresbtn("megenta-500")
-      setuserbtn("megenta-400")
+  const Latit = (e) => {
+    setlatit(e.target.value)
+  }
+  const Longi = (e) => {
+    setlongi(e.target.value)
+  }
+  const handleSignUpAsUser = () => {
+    setStatus("user");
+    setdisplayuser("block")
+    setdisplayrest("hidden")
+    setuserbtn("megenta-500")
+    setresbtn("megenta-400")
+  }
+  const handleSignUpAsRestaurant = () => {
+    setStatus("restaurant");
+    setdisplayrest("block")
+    setdisplayuser("hidden")
+    setresbtn("megenta-500")
+    setuserbtn("megenta-400")
+  }
+  const clickHandler=()=>{
+    if(status==="user"){
+      const credentials = {
+        userName: uname, 
+        password: upass, 
+        address: uaddress, 
+        city: ucity,
+        status: status
+      }
+      console.log(credentials);
+      Promise.resolve(signupApi(credentials)).then((res)=>{
+        console.log(res);
+        localStorage.setItem("token", res.data.token)
+        setloggedIn(true)
+        setOpen(false)
+      }).catch((e)=>{
+        console.log({e});
+      })
+      }
+    if(status==="restaurant"){
+      const credentials = {
+        userName: oname, 
+        password: opass,  
+        email: oemail,
+        status: status
+      }
+      Promise.resolve(addrest({
+        name: rname,
+        contactNumber: rphone,
+        address: raddress, 
+        city: rcity,
+        mapLocation : {
+          latitude: latit,
+          longitude: longi
+        }
+      })).then((res)=>{
+        console.log(res);
+        Promise.resolve(signupApi(credentials)).then((res)=>{
+          console.log(res);
+          localStorage.setItem("token", res.data.token)
+          setloggedIn(true)
+          setOpen(false)
+        }).catch((e)=>{
+          console.log({e});
+        })
+      }).catch((e)=>{
+        console.log({e});
+      })
+      }
     }
 
     // useEffect(() => {
@@ -150,16 +206,20 @@ export default function Signup() {
                         <form className={`my-6 ${displayrest}`}>
                           <h1 className="text-2xl font-semibold my-6 flex flex-start">Restaurant Details</h1>
                           <input placeholder="Restaurant Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rName} />
-                          <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rPass}/>
                           <input placeholder="Contact Number" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rPhone} />
                           <input placeholder="Address" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rAddress} />
                           <input placeholder="City" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rCity} />
+                          <div className="flex items-center">
+                            <p>Map Location - </p>
+                            <input placeholder="Latitude" className="p-4 m-2 w-1/4 h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={Latit}/>
+                            <input placeholder="Longitude" className="p-4 m-2 w-1/4 h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={Longi}/>
+                          </div>                            
                           <h1 className="text-2xl font-semibold my-6 flex flex-start">Restaurant Owner Details</h1>
                           <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oName} />
                           <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oPass} />
                           <input placeholder="Email" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oEmail} />
                         </form>
-                        <button className={`border border-gray-300 font-semibold w-full h-12 bg-${bgColor} cursor-${cursor}`}>Create Account</button>
+                        <button className={`border border-gray-300 font-semibold w-full h-12 bg-${bgColor} `} onClick={clickHandler}>Create Account</button>
                         <p className="m-4 font-dark text-xl">Or</p>
                         <div className="flex justify-center">
                           <button className="w-full h-12 text-center text-semibold text-lg border-2 border-gray-300 py-1 bg-white flex justify-center items-center gap-2"><FcGoogle className="w-8 h-8" /><p>Continue With Google</p></button>

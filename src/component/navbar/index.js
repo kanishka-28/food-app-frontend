@@ -10,10 +10,7 @@ import { Link } from 'react-router-dom';
 const ProfileDisclosure = () => {
     
     const { loggedIn, setloggedIn } = useContext(SignupContext);
-    
 
-
-    
     return (
         <Menu as="div" className="ml-3 relative">
             <div>
