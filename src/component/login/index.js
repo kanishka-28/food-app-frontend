@@ -11,8 +11,14 @@ export default function Login() {
   const [userbtn, setuserbtn] = useState("megenta-400")
   const [resbtn, setresbtn] = useState("megenta-400")
   const cancelButtonRef = useRef(null)
+  const [displayuser, setdisplayuser] = useState("block")
+  const [displayrest, setdisplayrest] = useState("hidden")
   const [uname, setuname] = useState("")
   const [upass, setupass] = useState("")
+  const [rname, setrName] = useState("")
+  const [rpass, setrpass] = useState("")
+  const [oname, setoname] = useState("")
+  const [opass, setopass] = useState("")
   const uName = (e) => {
     setuname(e.target.value)
   }
@@ -21,17 +27,32 @@ export default function Login() {
   }
   const [bgColor, setBgColor] = useState("gray-300")
   const [cursor, setCursor] = useState("not-allowed")
+  const rName = (e) => {
+    setrName(e.target.value)
+  }
+  const rPass = (e) => {
+    setrpass(e.target.value)
+  }
+  const oName = (e) => {
+    setoname(e.target.value)
+  }
+  const oPass = (e) => {
+    setopass(e.target.value)
+  }
   const handleSignUpAsUser = () => {
     setStatus("user");
+    setdisplayuser("block")
+    setdisplayrest("hidden")
     setuserbtn("megenta-500")
     setresbtn("megenta-400")
   }
   const handleSignUpAsRestaurant = () => {
     setStatus("restaurant");
+    setdisplayrest("block")
+    setdisplayuser("hidden")
     setresbtn("megenta-500")
     setuserbtn("megenta-400")
   }
-
   return (
     <Transition.Root show={loginOpen} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setLoginOpen}>
@@ -64,8 +85,8 @@ export default function Login() {
             <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:pl-0 md:pl-10">
               <div className="bg-white px-4 pt-5 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
-                  <div className="mt-3 text-center sm:text-left mb-8">
-                    <div className="flex justify-between mb-8">
+                  <div className="mt-3 text-center mr-0 md:mr-4 mb-8">
+                    <div className="flex  justify-between mb-8">
                     <Dialog.Title as="h3" className="text-2xl leading-6 font-medium text-gray-900">
                       Log In
                     </Dialog.Title>
@@ -84,20 +105,17 @@ export default function Login() {
                       <form className={`my-6 ${displayuser}`}>
                           <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uName} />
                           <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uPass}/>
-                          <input placeholder="Address" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uAddress} />
-                          <input placeholder="City" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uCity} />
                         </form>
                         <form className={`my-6 ${displayrest}`}>
                           <h1 className="text-2xl font-semibold my-6 flex flex-start">Restaurant Details</h1>
                           <input placeholder="Restaurant Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rName} />
                           <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rPass}/>
-                          <input placeholder="Contact Number" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rPhone} />
-                          <input placeholder="Address" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rAddress} />
-                          <input placeholder="City" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rCity} />
+                          
+                          
                           <h1 className="text-2xl font-semibold my-6 flex flex-start">Restaurant Owner Details</h1>
                           <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oName} />
                           <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oPass} />
-                          <input placeholder="Email" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oEmail} />
+                          
                         </form>
                          
                       
