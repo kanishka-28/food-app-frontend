@@ -7,8 +7,7 @@ import { AiOutlineClose } from "react-icons/ai";
 
 
 export default function Signup() {
-  const [open, setOpen] = useContext(SignupContext);
-
+  const {open, setOpen} = useContext(SignupContext);
 
   const cancelButtonRef = useRef(null)
   const [status, setStatus] = useState("user");
@@ -33,6 +32,7 @@ export default function Signup() {
           <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={fName} />
           <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={fpass} />
         </form>
+        <button className={`border border-gray-300 font-semibold w-full h-12 bg-${bgColor} cursor-${cursor}`}>Create Account</button>
       </>
 
     )
@@ -44,6 +44,7 @@ export default function Signup() {
           <input placeholder="Restaurant Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={fName} />
           <input placeholder="pass" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={fpass} />
         </form>
+        <button className={`border border-gray-300 font-semibold w-full h-12 bg-${bgColor} cursor-${cursor}`}>Create Account</button>
       </>
 
     )
@@ -125,8 +126,8 @@ export default function Signup() {
                       {
                         status === "restaurant" &&
                         <AsRetauranant />
+        
                       }
-                      <button className={`border border-gray-300 font-semibold w-full h-12 bg-${bgColor} cursor-${cursor}`}>Create Account</button>
                       <p className="m-4 font-dark text-xl">Or</p>
                       <div className="flex justify-center">
                         <button className="w-full h-12 text-center text-semibold text-lg border-2 border-gray-300 py-1 bg-white flex justify-center items-center gap-2"><FcGoogle className="w-8 h-8" /><p>Continue With Google</p></button>
