@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { IoLocationSharp } from "react-icons/io5";
 import { BiUser } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
-import { SignupContext } from "../../Context-Api/signup";
+import { SignupContext } from "../../context/signup";
 
 import Signup from '../signup';
 import Login from '../login';

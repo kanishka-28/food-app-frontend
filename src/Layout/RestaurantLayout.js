@@ -2,7 +2,7 @@ import React from 'react'
 import RestaurantTab from "../component/restaurantTab";
 import Navbar from '../component/navbar'
 import RestaurantGallery from '../component/restaurantGallery/index'
-import SigninApi from '../Context-Api/signup';
+import SigninApi from '../context/signup';
 
 export default function RestaurantLayout(props) {
     return (

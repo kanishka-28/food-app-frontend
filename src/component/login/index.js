@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState,useContext } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import  { SignupContext } from "../../Context-Api/signup";
+import  { SignupContext } from "../../context/signup";
 import { FcGoogle } from "react-icons/fc"
 import { AiOutlineClose } from "react-icons/ai";
 
