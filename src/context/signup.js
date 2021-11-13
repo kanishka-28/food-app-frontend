@@ -1,6 +1,5 @@
 import React,{createContext,useState} from 'react'
 import Login from '../component/login';
-import Navbar from '../component/navbar';
 import Signup from '../component/signup';
 
 

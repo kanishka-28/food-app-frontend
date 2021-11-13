@@ -1,7 +1,7 @@
 import React from 'react'
 import FoodTab from '../component/Food_tab'
 import Navbar from '../component/navbar'
-import SignApi from '../Context-Api/signup'
+import SignApi from '../context/signup'
 
 export default function HomeLayout(props) {
     return (

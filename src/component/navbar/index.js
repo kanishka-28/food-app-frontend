@@ -2,9 +2,8 @@ import React, { useContext,Fragment } from 'react'
 import { IoLocationSharp } from "react-icons/io5";
 import { BiUser } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
-import { SignupContext } from "../../Context-Api/signup";
-import {  Transition,Menu } from '@headlessui/react'
-
+import { SignupContext } from "../../context/signup";
+import { Menu, Transition } from "@headlessui/react";
 import Signup from '../signup';
 import Login from '../login';
 import { Link } from 'react-router-dom';

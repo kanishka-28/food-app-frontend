@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState,useContext } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import  { SignupContext } from "../../Context-Api/signup";
+import  { SignupContext } from "../../context/signup";
 import { FcGoogle } from "react-icons/fc"
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -80,19 +80,26 @@ export default function Login() {
 
                       </div>
                       
-                        {
-                          status==="user"?
-                          <>
-                          <form className={`my-6`}>
+                        
+                      <form className={`my-6 ${displayuser}`}>
                           <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uName} />
                           <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uPass}/>
-                          </form>
-                          </>
-                          :
-                          <div>
-                            hehe restaurant
-                          </div>
-                        }
+                          <input placeholder="Address" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uAddress} />
+                          <input placeholder="City" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uCity} />
+                        </form>
+                        <form className={`my-6 ${displayrest}`}>
+                          <h1 className="text-2xl font-semibold my-6 flex flex-start">Restaurant Details</h1>
+                          <input placeholder="Restaurant Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rName} />
+                          <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rPass}/>
+                          <input placeholder="Contact Number" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rPhone} />
+                          <input placeholder="Address" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rAddress} />
+                          <input placeholder="City" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rCity} />
+                          <h1 className="text-2xl font-semibold my-6 flex flex-start">Restaurant Owner Details</h1>
+                          <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oName} />
+                          <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oPass} />
+                          <input placeholder="Email" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oEmail} />
+                        </form>
+                         
                       
                       <button className={`border border-gray-300 rounded-md font-semibold w-full h-12 bg-megenta-400 text-white`}>Sign in</button>
                       <p className="m-4 font-dark text-xl">Or</p>

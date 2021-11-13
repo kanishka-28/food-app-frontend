@@ -5,7 +5,7 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
 import { Provider } from "react-redux";
-import SignupApi from './Context-Api/signup';
+import SignupApi from './context/signup';
 
 ReactDOM.render(
   <React.StrictMode>

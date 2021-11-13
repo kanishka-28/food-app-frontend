@@ -6,7 +6,7 @@ import RestaurantHOC from './HOC/RestaurantHOC';
 import RestaurantMaster from "./component/Master/RestaurantMaster";
 import Login from './component/login/index'
 import Signup from './component/signup/index'
-import SignupApi from './Context-Api/signup';
+import SignupApi from './context/signup';
 function App() {
 
   return (
