@@ -4,8 +4,7 @@ import { BiUser } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
 import { SignupContext } from "../../context/signup";
 import { Menu, Transition } from "@headlessui/react";
-import Signup from '../signup';
-import Login from '../login';
+
 import { Link } from 'react-router-dom';
 const ProfileDisclosure = () => {
     
@@ -55,7 +54,7 @@ const ProfileDisclosure = () => {
 }
 
 const MobileNav = () => {
-    const {open, setOpen,loginOpen, setLoginOpen,loggedIn, setloggedIn } = useContext(SignupContext);
+    const {open, setOpen,loginOpen, setLoginOpen,loggedIn} = useContext(SignupContext);
     return (
 
         <div className="p-4 md:hidden flex items-center justify-between w-full ">
@@ -89,7 +88,7 @@ const MobileNav = () => {
 }
 
 const LgNav = () => {
-    const {open, setOpen, loginOpen, setLoginOpen, loggedIn, setloggedIn } = useContext(SignupContext);
+    const {open, setOpen, loginOpen, setLoginOpen, loggedIn} = useContext(SignupContext);
 
     return (
 

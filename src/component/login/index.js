@@ -3,9 +3,10 @@ import { Dialog, Transition } from '@headlessui/react'
 import  { SignupContext } from "../../context/signup";
 import { FcGoogle } from "react-icons/fc"
 import { AiOutlineClose } from "react-icons/ai";
+import { userLogin } from '../../services/api';
 
 export default function Login() {
-  const {open, setOpen, loginOpen, setLoginOpen} = useContext(SignupContext);
+  const {open, setOpen, loginOpen, setLoginOpen,setloggedIn} = useContext(SignupContext);
   const [status, setStatus] = useState("user");
   
   const [userbtn, setuserbtn] = useState("megenta-400")
@@ -25,8 +26,7 @@ export default function Login() {
   const uPass = (e) => {
     setupass(e.target.value)
   }
-  const [bgColor, setBgColor] = useState("gray-300")
-  const [cursor, setCursor] = useState("not-allowed")
+  const [error, seterror] = useState("")
   const rName = (e) => {
     setrName(e.target.value)
   }
@@ -52,6 +52,24 @@ export default function Login() {
     setdisplayuser("hidden")
     setresbtn("megenta-500")
     setuserbtn("megenta-400")
+  }
+  const handleUserSignin=(e)=>{
+    e.preventDefault()
+    userLogin({userName:uname,password:upass}).then((res)=>
+    {localStorage.setItem("token",res.data.token)
+    if(res.data.user==="user"){
+      setLoginOpen(!loginOpen);
+      setloggedIn(true);
+    }
+    })
+    .catch((e)=>{
+      
+      seterror(e.response.data.error);
+      setInterval(() => {
+        seterror("")
+      }, 5000);
+      // console.log(e.response)
+    })
   }
   return (
     <Transition.Root show={loginOpen} as={Fragment}>
@@ -103,23 +121,28 @@ export default function Login() {
                       
                         
                       <form className={`my-6 ${displayuser}`}>
-                          <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uName} />
-                          <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uPass}/>
+                          <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uName} value={uname} />
+                          <input type="password" placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uPass} value={upass} />
+                      <button onClick={handleUserSignin} className={`border border-gray-300 rounded-md font-semibold w-full h-12 bg-megenta-400 text-white`}>Sign in </button>
+                      <div className="h-10" >
+                          <p className="text-md" >{error}</p>
+
+                      </div>
                         </form>
                         <form className={`my-6 ${displayrest}`}>
                           <h1 className="text-2xl font-semibold my-6 flex flex-start">Restaurant Details</h1>
                           <input placeholder="Restaurant Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rName} />
-                          <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rPass}/>
+                          <input placeholder="City" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rPass}/>
                           
                           
                           <h1 className="text-2xl font-semibold my-6 flex flex-start">Restaurant Owner Details</h1>
                           <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oName} />
                           <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oPass} />
+                      <button className={`border border-gray-300 rounded-md font-semibold w-full h-12 bg-megenta-400 text-white`}>Sign in</button>
                           
                         </form>
                          
                       
-                      <button className={`border border-gray-300 rounded-md font-semibold w-full h-12 bg-megenta-400 text-white`}>Sign in</button>
                       <p className="m-4 font-dark text-xl">Or</p>
                       <button className="w-full h-12 text-center text-semibold text-lg border border-gray-300 py-1 bg-white flex justify-center items-center gap-2"><FcGoogle className="w-8 h-8"/><p>Login With Google</p></button>
                     </div>

@@ -8,7 +8,11 @@ export const SignupContext= createContext();
 const SignupApi = (props) => {
     const [open, setOpen] = useState(false);
     const [loginOpen, setLoginOpen] = useState(false)
-    const [loggedIn, setloggedIn] = useState(true)
+    let check=false;
+    if(localStorage.getItem("token")){
+        check=true
+    }
+    const [loggedIn, setloggedIn] = useState(check)
     return (
         <SignupContext.Provider  value={{open,setOpen, loginOpen, setLoginOpen,loggedIn, setloggedIn}} >
            

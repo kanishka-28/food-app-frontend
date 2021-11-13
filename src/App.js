@@ -4,9 +4,12 @@ import Temp from './component/temp';
 import HomeHOC from './HOC/Home.HOC';
 import RestaurantHOC from './HOC/RestaurantHOC';
 import RestaurantMaster from "./component/Master/RestaurantMaster";
-import Login from './component/login/index'
-import Signup from './component/signup/index'
+import axios from "axios";
 import SignupApi from './context/signup';
+
+//axios default settings 
+axios.defaults.baseURL = 'http://localhost:4000'; 
+axios.defaults.params = {};
 function App() {
 
   return (
