@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext,Fragment } from 'react'
 import { IoLocationSharp } from "react-icons/io5";
 import { BiUser } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -7,7 +7,55 @@ import { SignupContext } from "../../context/signup";
 import Signup from '../signup';
 import Login from '../login';
 import { Link } from 'react-router-dom';
+const ProfileDisclosure = () => {
+    
+    const { loggedIn, setloggedIn } = useContext(SignupContext);
+    
+
+
+    
+    return (
+        <Menu as="div" className="ml-3 relative">
+            <div>
+                <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <span className="sr-only">Open user menu</span>
+                    {
+                            <BiUser className="w-10 h-10 rounded-full bg-red-400 text-white " />
+                    }
+
+                </Menu.Button>
+            </div>
+            <Transition
+                as={Fragment}
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+            >
+                <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                   
+                    <Menu.Item>
+                        {({ active }) => (
+                            <button
+                                onClick={() => {
+                                    localStorage.removeItem("token")
+                                    setloggedIn(!loggedIn)
+                                }}
+                                className={(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}>
+                                Sign out
+                            </button>
+                        )}
+                    </Menu.Item>
+                </Menu.Items>
+            </Transition>
+        </Menu>
+    )
+}
+
 const MobileNav = () => {
+    const {open, setOpen,loginOpen, setLoginOpen,loggedIn, setloggedIn } = useContext(SignupContext);
     return (
 
         <div className="p-4 md:hidden flex items-center justify-between w-full ">
@@ -17,17 +65,31 @@ const MobileNav = () => {
                 </div>
             </Link>
             <div className="flex items-center gap-3" >
-                <button className="bg-zomato-400 text-white py-2 px-3 rounded-full">
-                      <BiUser />
-            </button>
+            {
+                !loggedIn ?
+                <div className="flex gap-5" >
+                    
+                <button onClick={()=>(setLoginOpen(!loginOpen))} >
+                    Log In
+
+                    </button>
+                <button onClick={() => (setOpen(!open))}>
+                    Sign Up
+
+                    </button>
+
+
+            </div>:
+            <ProfileDisclosure/>
+                }
             </div>
         </div>
     )
 
 }
+
 const LgNav = () => {
-    const [open, setOpen, loginOpen, setLoginOpen] = useContext(SignupContext);
-    // const [open2,setopen2] = useContext(LoginContext);
+    const {open, setOpen, loginOpen, setLoginOpen, loggedIn, setloggedIn } = useContext(SignupContext);
 
     return (
 
@@ -51,7 +113,9 @@ const LgNav = () => {
 
                 </div>
             </div>
-            <div className="flex gap-5" >
+            {
+                !loggedIn ?
+                <div className="flex gap-5" >
                     
                 <button onClick={()=>(setLoginOpen(!loginOpen))} >
                     Log In
@@ -63,9 +127,11 @@ const LgNav = () => {
                     </button>
 
 
-            </div>
+            </div>:
+            <ProfileDisclosure/>
+                }
         </div>
-    )
+        )
 
 }
 function Navbar() {
@@ -74,8 +140,7 @@ function Navbar() {
             <nav >
                 <MobileNav />
                 <LgNav />
-                <Signup/>
-                <Login/>
+                
             </nav>
 
         </>

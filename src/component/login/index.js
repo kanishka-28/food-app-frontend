@@ -5,7 +5,7 @@ import { FcGoogle } from "react-icons/fc"
 import { AiOutlineClose } from "react-icons/ai";
 
 export default function Login() {
-  const [open, setOpen, loginOpen, setLoginOpen] = useContext(SignupContext);
+  const {open, setOpen, loginOpen, setLoginOpen} = useContext(SignupContext);
   console.log("login Open :"+loginOpen)
 
   const cancelButtonRef = useRef(null)

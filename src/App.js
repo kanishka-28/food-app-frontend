@@ -11,13 +11,12 @@ function App() {
 
   return (
     <>
+      <SignupApi>
       <HomeHOC path="/" exact component={Temp} />
       <HomeHOC key="home" path="/home/:type" exact component={Master} />
       <RestaurantHOC key="restaurant" path="/restaurant/:type" exact component={RestaurantMaster} />
     
-      <SignupApi>
-            <Login/>
-            <Signup />
+           
       </SignupApi>
     </>
   );

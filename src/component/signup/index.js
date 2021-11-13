@@ -5,7 +5,8 @@ import { FcGoogle } from "react-icons/fc"
 import { AiOutlineClose } from "react-icons/ai";
 
 export default function Signup() {
-  const [open, setOpen] = useContext(SignupContext);
+  const {open, setOpen} = useContext(SignupContext);
+
   const cancelButtonRef = useRef(null)
   const [status, setStatus] = useState("user");
   const [bgColor, setBgColor] = useState("gray-300")
