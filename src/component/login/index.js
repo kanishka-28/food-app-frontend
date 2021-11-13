@@ -6,15 +6,30 @@ import { AiOutlineClose } from "react-icons/ai";
 
 export default function Login() {
   const {open, setOpen, loginOpen, setLoginOpen} = useContext(SignupContext);
-  console.log("login Open :"+loginOpen)
-
+  const [status, setStatus] = useState("user");
+  
+  const [userbtn, setuserbtn] = useState("megenta-400")
+  const [resbtn, setresbtn] = useState("megenta-400")
   const cancelButtonRef = useRef(null)
-
+  const [uname, setuname] = useState("")
+  const [upass, setupass] = useState("")
+  const uName = (e) => {
+    setuname(e.target.value)
+  }
+  const uPass = (e) => {
+    setupass(e.target.value)
+  }
   const [bgColor, setBgColor] = useState("gray-300")
   const [cursor, setCursor] = useState("not-allowed")
-  const sendOTP = (e) => {
-     e.target.value.length === 10 ? setBgColor("red-500") : setBgColor("gray-300") 
-     e.target.value.length === 10 ? setCursor("pointer") : setCursor("not-allowed") 
+  const handleSignUpAsUser = () => {
+    setStatus("user");
+    setuserbtn("megenta-500")
+    setresbtn("megenta-400")
+  }
+  const handleSignUpAsRestaurant = () => {
+    setStatus("restaurant");
+    setresbtn("megenta-500")
+    setuserbtn("megenta-400")
   }
 
   return (
@@ -49,8 +64,7 @@ export default function Login() {
             <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:pl-0 md:pl-10">
               <div className="bg-white px-4 pt-5 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
-
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left mb-8">
+                  <div className="mt-3 text-center sm:text-left mb-8">
                     <div className="flex justify-between mb-8">
                     <Dialog.Title as="h3" className="text-2xl leading-6 font-medium text-gray-900">
                       Log In
@@ -60,18 +74,27 @@ export default function Login() {
                   ref={cancelButtonRef}><AiOutlineClose className="w-6"/></button>
                     </div>
                     <div className="mt-2 text-center">
-                      <form className="flex my-6 border border-gray-300 rounded-md">
-                        <select id="cars" name="🈯+91" className=" w-16 h-10">
-                          <option value="">+91</option>
-                          <option value="">+00</option>
-                          <option value="">+44</option>
-                          <option value="">+121</option>
-                          <option value="">+90</option>
-                          <option value="">+363</option>
-                        </select>
-                        <input placeholder="phone-number" className="px-14 w-5/6 h-10 focus:border-none focus:outline-none focus:ring-1 focus:ring-black" onChange={sendOTP}/>
-                      </form>
-                      <button className={`border border-gray-300 rounded-md font-semibold w-full h-12 bg-${bgColor} cursor-${cursor}`}>Send OTP</button>
+                      <div className="flex gap-4 justify-between text-sm md:text-md" >
+                        <button onClick={handleSignUpAsUser} className={`bg-${userbtn} w-max md:w-1/2 rounded-lg py-2 px-4 text-white text-sm lg:text-lg hover:bg-megenta-500 focus:ring-2 focus:ring-offset-2 focus:ring-red-500 focus:border-megenta-300`} >Sign in as User</button>
+                          <button onClick={handleSignUpAsRestaurant} className={`bg-${resbtn} w-max md:w-1/2 rounded-lg py-2 px-4 text-white text-sm lg:text-lg hover:bg-megenta-500 focus:ring-2 focus:ring-offset-2 focus:ring-red-500 focus:border-megenta-300`}  >Sign in as Restaurant</button>
+
+                      </div>
+                      
+                        {
+                          status==="user"?
+                          <>
+                          <form className={`my-6`}>
+                          <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uName} />
+                          <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uPass}/>
+                          </form>
+                          </>
+                          :
+                          <div>
+                            hehe restaurant
+                          </div>
+                        }
+                      
+                      <button className={`border border-gray-300 rounded-md font-semibold w-full h-12 bg-megenta-400 text-white`}>Sign in</button>
                       <p className="m-4 font-dark text-xl">Or</p>
                       <button className="w-full h-12 text-center text-semibold text-lg border border-gray-300 py-1 bg-white flex justify-center items-center gap-2"><FcGoogle className="w-8 h-8"/><p>Login With Google</p></button>
                     </div>

@@ -15,7 +15,7 @@ export default function Signup() {
   const [cursor, setCursor] = useState("not-allowed")
   const [name, setName] = useState("")
   const [pass, setpass] = useState("")
-
+  
   const fName = (e) => {
     setName(e.target.value)
     console.log(e.target.value);
@@ -32,16 +32,19 @@ export default function Signup() {
   const resName = (e) => {
     setpass(e.target.value)
   }
-
+  
   const AsUser = () => {
     return (
       <>
-        <form className="my-6">
-          <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={fName} value={name}/>
+        
+          <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={(e)=>{
+            console.log((e.target.value))
+            
+          }} value={name}/>
           <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={fpass} value={pass}/>
           <input placeholder="Address" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={address}/>
           <input placeholder="City" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={city}/>
-        </form>
+        
         <button className={`border border-gray-300 font-semibold w-full h-12 bg-${bgColor} cursor-${cursor}`}>Create Account</button>
       </>
 
