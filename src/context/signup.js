@@ -18,12 +18,8 @@ const SignupState = (props) => {
     const [user, setuser] = useState({})
 
     useEffect(() => {
-        
-        
         getRestaurant().then((res)=>{
-            
             setrestaurant(res.data.restaurants)
-            
         }
         ).catch((e)=>{
             console.log(e.response.data);
@@ -33,6 +29,7 @@ const SignupState = (props) => {
             }, 5000);
         })
     }, [loggedIn,])
+    
     return (
         <SignupContext.Provider  value={{open,setOpen, loginOpen, setLoginOpen,loggedIn, setloggedIn,restaurant, setrestaurant, error, seterror, user, setuser, status, setstatus}} >
            <Signup/>
