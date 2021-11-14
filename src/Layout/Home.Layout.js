@@ -7,25 +7,30 @@ import SignApi from '../context/signup'
 
 export default function HomeLayout(props) {
   const location = useLocation();
-  
-    return (
-        <>
-        <div className="container mx-auto lg:px-20">
-          <SignApi>
-            <Navbar/>
+  console.log(JSON.parse(localStorage.getItem("user")));
+  return (
+    <>
+      <div className="container mx-auto lg:px-20">
+        <SignApi>
+          <Navbar />
 
-          </SignApi>
-        </div>
-        {
-          location.pathname!=="/updaterestaurant" && <FoodTab/>
-        }
-        <OwnerTab/>
-        <div className="container mx-auto lg:px-20">
-          {props.children}
+        </SignApi>
+      </div>
+      {
+        JSON.parse(!localStorage.getItem("user")) && <OwnerTab />
+      }
+      {
+        JSON.parse(localStorage.getItem("user")) && .status === "user" && <FoodTab />
+      }
+      {
+        JSON.parse(localStorage.getItem("user")).status === "restaurant" && <OwnerTab />
+      }
+      <div className="container mx-auto lg:px-20">
+        {props.children}
 
-        </div>
+      </div>
 
-        
-        </>
-    )
+
+    </>
+  )
 }

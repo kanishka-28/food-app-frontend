@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { addfood } from '../../services/api'
 
 const AddFood = () => {
@@ -7,16 +7,22 @@ const AddFood = () => {
     const [des, setdes] = useState("")  
     const [category, setcategory] = useState("")
     const [price, setprice] = useState(false)
-    const [isVeg, setisVeg] = useState("")
+    const [isVeg, setisVeg] = useState(false)
     const [isContainEgg, setisContainEgg] = useState(false)
 
+    useEffect(() => {
+        console.log(isVeg);
+        console.log(isContainEgg);
+        
+    }, [isVeg,isContainEgg])
+
     const clickHandler=()=>{
-        const id = "6190ae0d0da66e3c85cc2419"
+        const id = (localStorage.getItem("id"));
         Promise.resolve(addfood({
             name: food,
             descript: des,
-            isVeg: true,
-            isContainEgg: false,
+            isVeg ,
+            isContainEgg,
             category: category,
             price: price
         }, id)).then((res)=>{
@@ -62,13 +68,13 @@ const AddFood = () => {
                 <div className="flex items-center justify-evenly my-2 w-3/4">
                     <p>isVeg</p>
                     <input type="checkbox" className="py-4 mx-2 text-center w-6 h-12 focus:border-none focus:outline-none border border-gray-300 rounded-md" onClick={(e)=>{
-                      setisVeg(e.target.value)
+                      setisVeg(!isVeg)
                     }}/>
                 </div>
                 <div className="flex items-center justify-evenly my-2 w-3/4">
                     <p>isContainEgg</p>
                     <input type="checkbox" className="py-4 mx-2 text-center w-6 h-12 focus:border-none focus:outline-none border border-gray-300 rounded-md" onClick={(e)=>{
-                      setisContainEgg(e.target.value)
+                      setisContainEgg(!isContainEgg)
                     }}/>
                 </div>
                 <button class="mt-4 w-40 bg-megenta-400 hover:bg-red-700 text-white font-bold py-2 px-8 rounded" onClick={clickHandler}>

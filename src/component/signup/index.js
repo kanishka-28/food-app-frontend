@@ -7,11 +7,7 @@ import { addrest, signupApi } from '../../services/api';
 import { useHistory } from 'react-router';
 
 export default function Signup() {
-<<<<<<< HEAD
-  const {open, setOpen,loginOpen, setLoginOpen,loggedIn, setloggedIn, setuser } = useContext(SignupContext);
-=======
-  const {open, setOpen,loginOpen, setLoginOpen,loggedIn, setloggedIn,specificRestaurant, setsepecificRestaurant } = useContext(SignupContext);
->>>>>>> ac31d2ba3249d2549a316193f89554562d04b4b8
+  const {open, setOpen,loginOpen, setLoginOpen,loggedIn, setloggedIn,specificRestaurant, setsepecificRestaurant,setuser } = useContext(SignupContext);
   const cancelButtonRef = useRef(null)
   const [status, setStatus] = useState("user");
   const [bgColor, setBgColor] = useState("gray-300")

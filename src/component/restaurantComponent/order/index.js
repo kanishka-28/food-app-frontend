@@ -20,9 +20,9 @@ const Order = () => {
     const [foodDetails, setfoodDetails] = useState({name: "", price: 200})
     const { restaurant } = useContext(SignupContext)
     const user = JSON.parse(localStorage.getItem("user"))
-
+    console.log(user);
     useEffect(() => {
-        const id = "6190ae0d0da66e3c85cc2419"
+        const id = localStorage.getItem("id");
         Promise.resolve(getfood(id)).then((res) => {
             setfoods(res.data.foods)
             console.log(foods);
@@ -32,11 +32,11 @@ const Order = () => {
     }, [])
 
     const placeOrder = () => {
-        console.log(restaurant);
+     
         const id = user._id
-        console.log(restaurant);
+     
         const orderDetails = {
-            restaurant: "6190ae0d0da66e3c85cc2419",
+            restaurant: localStorage.getItem("id"),
             food: "618f40f84ec908776bb129fd",
             quantity: 1,
             itemTotal: 1,
@@ -156,7 +156,7 @@ const Order = () => {
                 </div>
                 <div className="flex bg-blue-600 text-white items-center rounded-md p-3 w-max">
                     <BsCheckCircleFill className="mr-2" />
-                    <p>Delivering to : <strong>{user.address} {user.city}</strong></p>
+                    {/* <p>Delivering to : <strong>{user.address} {user.city}</strong></p> */}
                     {/* <div className="pl-36">Change</div> */}
                 </div>
                 {foods.length !== 0 ? foods.map((food) => (

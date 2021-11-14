@@ -85,15 +85,12 @@ export default function Login() {
       e.preventDefault()
       Promise.resolve(userLogin({userName:oname,password:opass})).then((res)=>{
         console.log(res);
-<<<<<<< HEAD
         {localStorage.setItem("token",res.data.token)}
         localStorage.setItem("user", JSON.stringify(res.data.details))
-        Promise.resolve(restLogin({name: rname, city: rcity})).then((res)=>{
-=======
         localStorage.setItem("restaurant",JSON.stringify(res.data.result)) 
-        Promise.resolve(userLogin({userName:oname,password:opass})).then((res)=>{
-          {localStorage.setItem("token",res.data.token)}
->>>>>>> ac31d2ba3249d2549a316193f89554562d04b4b8
+        localStorage.setItem("token",res.data.token)
+        
+        Promise.resolve(restLogin({name: rname, city: rcity})).then((res)=>{
           setloggedIn(true)
           setLoginOpen(false)
         }).catch((e)=>{
