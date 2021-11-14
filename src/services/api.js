@@ -4,6 +4,9 @@ import { Router } from "react-router-dom";
 export const userLogin=async (data)=>{
     return await axios.post("/auth/signin",{credentials:  data});
 }
+export const googleLogin=async (data)=>{
+    return await axios.post("/auth/googlesignin",{credentials:  data});
+}
 export const restLogin=async (data)=>{
     return await axios.post("/restaurant/login",{credentials:  data},{
         headers:{
