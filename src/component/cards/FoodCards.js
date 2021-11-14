@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 const FoodCards = ({name, city, photos}) => {
-    console.log(name);
+   
     return (
         <div className="w-full h-full my-4 rounded-lg shadow-lg relative ">
             <Link to="/restaurant/overview">

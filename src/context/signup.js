@@ -16,7 +16,7 @@ const SignupApi = (props) => {
     const [restaurant, setrestaurant] = useState([])
     useEffect(() => {
         
-        console.log(loggedIn);
+        
         getRestaurant().then((res)=>{
             
             setrestaurant(res.data.restaurants)
@@ -29,7 +29,7 @@ const SignupApi = (props) => {
                 seterror(null)
             }, 5000);
         })
-    }, [loggedIn])
+    }, [loggedIn,])
     return (
         <SignupContext.Provider  value={{open,setOpen, loginOpen, setLoginOpen,loggedIn, setloggedIn,restaurant, setrestaurant, error}} >
            <Signup/>

@@ -8,7 +8,7 @@ const AllCards = () => {
         
     
     const {loggedIn,setloggedIn, restaurant, error} = useContext(SignupContext);
-    console.log(restaurant);
+   
     return (
         <>
         {
@@ -18,7 +18,7 @@ const AllCards = () => {
             <div className="md:hidden mb-24">
                 {
                     restaurant.map(oneRestaurant=>{
-                        console.log(oneRestaurant);
+                       
                         return <FoodCards name={oneRestaurant.name} city={oneRestaurant.city} photos={oneRestaurant.photos} />
                         
                         

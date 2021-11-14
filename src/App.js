@@ -5,10 +5,7 @@ import Temp from './component/temp';
 import HomeHOC from './HOC/Home.HOC';
 import RestaurantHOC from './HOC/RestaurantHOC';
 import RestaurantMaster from "./component/Master/RestaurantMaster";
-<<<<<<< HEAD
 
-=======
->>>>>>> ac6152b0e6bf29560ab633d4afbadea9327b0876
 import SignupApi from './context/signup';
 
 //axios default settings 
