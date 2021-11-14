@@ -18,14 +18,10 @@ const SignupState = (props) => {
     const [status, setstatus] = useState("")
     const [user, setuser] = useState({})
     const [specificRestaurant, setsepecificRestaurant] = useState({})
+    
     useEffect(() => {
-        
-        
-        
         getRestaurant().then((res)=>{
-            
             setrestaurant(res.data.restaurants)
-            
         }
         ).catch((e)=>{
             console.log(e.response.data);

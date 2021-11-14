@@ -15,11 +15,12 @@ import { SignupContext } from '../../../context/signup';
 const Order = () => {
 
     const [price, setprice] = useState()
-    const {user} = useContext(SignupContext)
+    const {user, restaurant} = useContext(SignupContext)
     const placeOrder=()=>{
         const id = user._id
+        console.log(restaurant);
         const orderDetails = {
-            restaurant: "618f3e11ad466d30f38d37f4",
+            restaurant: restaurant._id,
             food: "618f40f84ec908776bb129fd",
             quantity: 1,
             itemTotal: 1,

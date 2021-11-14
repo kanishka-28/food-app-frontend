@@ -38,8 +38,6 @@ export const getRestaurant=()=>{
         console.log(position.coords.longitude);
          x=position.coords.latitude
          y=position.coords.longitude
-        
-        
     }
     return axios.get("/restaurant",{
         headers: {token: localStorage.getItem("token")},
