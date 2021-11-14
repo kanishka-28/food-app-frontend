@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import  { SignupContext } from "../../context/signup";
 import { FcGoogle } from "react-icons/fc"
 import { AiOutlineClose } from "react-icons/ai";
-import { userLogin } from '../../services/api';
+import { restLogin, userLogin } from '../../services/api';
 
 export default function Login() {
   const {open, setOpen, loginOpen, setLoginOpen,setloggedIn} = useContext(SignupContext);
@@ -17,7 +17,7 @@ export default function Login() {
   const [uname, setuname] = useState("")
   const [upass, setupass] = useState("")
   const [rname, setrName] = useState("")
-  const [rpass, setrpass] = useState("")
+  const [rcity, setrcity] = useState("")
   const [oname, setoname] = useState("")
   const [opass, setopass] = useState("")
   const uName = (e) => {
@@ -30,8 +30,8 @@ export default function Login() {
   const rName = (e) => {
     setrName(e.target.value)
   }
-  const rPass = (e) => {
-    setrpass(e.target.value)
+  const rCity = (e) => {
+    setrcity(e.target.value)
   }
   const oName = (e) => {
     setoname(e.target.value)
@@ -39,37 +39,77 @@ export default function Login() {
   const oPass = (e) => {
     setopass(e.target.value)
   }
-  const handleSignUpAsUser = () => {
-    setStatus("user");
+  const handleSignInAsUser = () => {
+    setStatus("restaurant");
+    console.log(status);
     setdisplayuser("block")
     setdisplayrest("hidden")
     setuserbtn("megenta-500")
     setresbtn("megenta-400")
   }
-  const handleSignUpAsRestaurant = () => {
-    setStatus("restaurant");
+  const handleSignInAsRestaurant = () => {
+    setStatus("user");
     setdisplayrest("block")
+    console.log(status);
     setdisplayuser("hidden")
     setresbtn("megenta-500")
     setuserbtn("megenta-400")
   }
   const handleUserSignin=(e)=>{
-    e.preventDefault()
-    userLogin({userName:uname,password:upass}).then((res)=>
-    {localStorage.setItem("token",res.data.token)
-    if(res.data.user==="user"){
-      setLoginOpen(!loginOpen);
-      setloggedIn(true);
-    }
+    console.log(status);
+    if(status==="user"){
+      e.preventDefault()
+      Promise.resolve(userLogin({userName:uname,password:upass})).then((res)=>
+      {localStorage.setItem("token",res.data.token)
+      if(res.data.user==="user"){
+        setLoginOpen(!loginOpen);
+        setloggedIn(true);
+      }
     })
     .catch((e)=>{
-      
       seterror(e.response.data.error);
       setInterval(() => {
         seterror("")
       }, 5000);
       // console.log(e.response)
     })
+  }
+  else if(status==="restaurant"){
+    // e.preventDefault()
+    // Promise.resolve(userLogin({userName:uname,password:upass})).then((res)=>
+    //   {localStorage.setItem("token",res.data.token)
+    //   if(res.data.user==="user"){
+    //     setLoginOpen(!loginOpen);
+    //     setloggedIn(true);
+    //   }
+    //   })
+    //   .catch((e)=>{
+    //     seterror(e.response.data.error);
+    //     setInterval(() => {
+    //       seterror("")
+    //     }, 5000);
+    //     // console.log(e.response)
+    //   })
+    console.log("nhi");
+    }
+      // Promise.resolve(userLogin({userName:oname,password:opass})).then((res)=>{
+      // {localStorage.setItem("token",res.data.token)}  
+      //   console.log(res)
+        // Promise.resolve(restLogin({name: rname, city: rcity})).then((res)=>{
+        //   console.log(res);
+        //   setloggedIn(true)
+        //   setLoginOpen(false)
+        // })
+    //   }).catch((e)=>{
+    //       setloggedIn(true)
+    //       setLoginOpen(false)
+    //     seterror(e.response.data.error);
+    //     setInterval(() => {
+    //       seterror("")
+    //     }, 5000);
+    //     // console.log(e.response)
+    //   })
+    // }
   }
   return (
     <Transition.Root show={loginOpen} as={Fragment}>
@@ -114,8 +154,8 @@ export default function Login() {
                     </div>
                     <div className="mt-2 text-center">
                       <div className="flex gap-4 justify-between text-sm md:text-md" >
-                        <button onClick={handleSignUpAsUser} className={`bg-${userbtn} w-max md:w-1/2 rounded-lg py-2 px-4 text-white text-sm lg:text-lg hover:bg-megenta-500 focus:ring-2 focus:ring-offset-2 focus:ring-red-500 focus:border-megenta-300`} >Sign in as User</button>
-                          <button onClick={handleSignUpAsRestaurant} className={`bg-${resbtn} w-max md:w-1/2 rounded-lg py-2 px-4 text-white text-sm lg:text-lg hover:bg-megenta-500 focus:ring-2 focus:ring-offset-2 focus:ring-red-500 focus:border-megenta-300`}  >Sign in as Restaurant</button>
+                        <button onClick={handleSignInAsUser} className={`bg-${userbtn} w-max md:w-1/2 rounded-lg py-2 px-4 text-white text-sm lg:text-lg hover:bg-megenta-500 focus:ring-2 focus:ring-offset-2 focus:ring-red-500 focus:border-megenta-300`} >Sign in as User</button>
+                          <button onClick={handleSignInAsRestaurant} className={`bg-${resbtn} w-max md:w-1/2 rounded-lg py-2 px-4 text-white text-sm lg:text-lg hover:bg-megenta-500 focus:ring-2 focus:ring-offset-2 focus:ring-red-500 focus:border-megenta-300`}  >Sign in as Restaurant</button>
 
                       </div>
                       
@@ -132,7 +172,7 @@ export default function Login() {
                         <form className={`my-6 ${displayrest}`}>
                           <h1 className="text-2xl font-semibold my-6 flex flex-start">Restaurant Details</h1>
                           <input placeholder="Restaurant Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rName} />
-                          <input placeholder="City" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rPass}/>
+                          <input placeholder="City" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rCity}/>
                           
                           
                           <h1 className="text-2xl font-semibold my-6 flex flex-start">Restaurant Owner Details</h1>
