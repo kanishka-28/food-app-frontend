@@ -19,7 +19,7 @@ const FoodCards = ({name, city, photos}) => {
             </div>
             <div className="flex justify-between m-2">
                 <div className="text-gray-600 font-small text-center">{city}</div>
-                <div className="text-gray-600 font-small text-center">₹ 100 for one</div>
+                
             </div>
             <div className="flex justify-evenly m-2">
                 <img src="https://b.zmtcdn.com/data/o2_assets/4bf016f32f05d26242cea342f30d47a31595763089.png" 

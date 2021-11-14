@@ -131,13 +131,14 @@ export default function Signup() {
           latitude: latit,
           longitude: longi
         }
-      })).then((res)=>{
-        console.log(res);
-        Promise.resolve(signupApi(credentials)).then((res)=>{
-          console.log(res);
-          localStorage.setItem("token", res.data.token)
+      })).then((res1)=>{
+        console.log(res1);
+        Promise.resolve(signupApi(credentials)).then((res2)=>{
+          console.log(res2);
+          localStorage.setItem("token", res2.data.token)
           setloggedIn(true)
           setOpen(false)
+          // history.push()
         }).catch((e)=>{
           console.log(e.response);
         })

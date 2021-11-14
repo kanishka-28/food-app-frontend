@@ -8,7 +8,7 @@ const AllCards = () => {
         
     
     const {loggedIn,setloggedIn, restaurant, error} = useContext(SignupContext);
-   
+   console.log(restaurant);
     return (
         <>
         {
@@ -26,15 +26,24 @@ const AllCards = () => {
                 }
             </div>
             <div className="hidden md:block">
-                <div className="flex flex-wrap gap-3 justify-evenly">
-                    <div className="w-80 mb-16"><FoodCards /></div>
-                    <div className="w-80 mb-16"><FoodCards /></div>
-                    <div className="w-80 mb-16"><FoodCards /></div>
-                    <div className="w-80 mb-16"><FoodCards /></div>
-                    <div className="w-80 mb-16"><FoodCards /></div>
-                    <div className="w-80 mb-16"><FoodCards /></div>
-                </div>
+                <div className="w-full flex  flex-wrap gap-3 justify-evenly">
+                
+                {
+                    restaurant.map(oneRestaurant=>{
+                       
+                        return (
+                            <div className="w-1/4">
+
+                                <FoodCards name={oneRestaurant.name} city={oneRestaurant.city} photos={oneRestaurant.photos} />
+                            </div>
+                        )
+                        
+                        
+                    })
+                }
             </div>
+                </div>
+            
             </>
             }
         </>
