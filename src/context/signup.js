@@ -4,7 +4,7 @@ import Signup from '../component/signup';
 import { getRestaurant } from '../services/api';
 export const SignupContext= createContext(); 
 
-const SignupApi = (props) => {
+const SignupState = (props) => {
     const [open, setOpen] = useState(false);
     const [loginOpen, setLoginOpen] = useState(false)
     let check=false;
@@ -14,6 +14,9 @@ const SignupApi = (props) => {
     const [loggedIn, setloggedIn] = useState(check);
     const [error, seterror] = useState()
     const [restaurant, setrestaurant] = useState([])
+    const [status, setstatus] = useState("")
+    const [user, setuser] = useState({})
+
     useEffect(() => {
         
         console.log(loggedIn);
@@ -31,7 +34,7 @@ const SignupApi = (props) => {
         })
     }, [loggedIn])
     return (
-        <SignupContext.Provider  value={{open,setOpen, loginOpen, setLoginOpen,loggedIn, setloggedIn,restaurant, setrestaurant, error}} >
+        <SignupContext.Provider  value={{open,setOpen, loginOpen, setLoginOpen,loggedIn, setloggedIn,restaurant, setrestaurant, error, seterror, user, setuser, status, setstatus}} >
            <Signup/>
            <Login/>
             {props.children}
@@ -39,4 +42,4 @@ const SignupApi = (props) => {
     )
 }
 
-export default SignupApi;   
+export default SignupState;   

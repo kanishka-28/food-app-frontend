@@ -16,20 +16,20 @@ const Order = () => {
     const [price, setprice] = useState()
 
     const placeOrder=()=>{
+        const id = "619094b7ae7ed2aad609abd2"
         const orderDetails = {
-            id: "user ki id",
-            restaurant: "rest ki id",
-            food: "food ki id",
+            restaurant: "618f3e11ad466d30f38d37f4",
+            food: "618f40f84ec908776bb129fd",
             quantity: 1,
             itemTotal: 1,
         }
-        Promise.resolve(orderfood(orderDetails)).then((res)=>{
+        Promise.resolve(orderfood(orderDetails, id)).then((res)=>{
             console.log(res);
         }).catch((e)=>{
             console.log(e.response);
         })
     }
-    const [open, setopen] = useState(true)
+    const [open, setopen] = useState(false)
 
     function OrderModal() {
         const cancelButtonRef = useRef(null)
@@ -137,7 +137,9 @@ const Order = () => {
                     <div className="pl-36">Change</div>
                 </div>
                 <div  >
-                    <button onClick={() => setopen(true)} class="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-8 rounded">
+                    <button onClick={() => {
+                        setopen(true)
+                    }} class="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-8 rounded">
                         Order Food
                     </button>
                 </div>
@@ -147,7 +149,7 @@ const Order = () => {
     return (
         <div className="hidden md:block lg:px-28 ">
             <LapOrder />
-            <OrderModal/>    
+            {(setopen)&&<OrderModal/>}
         </div>
     )
 }

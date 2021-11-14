@@ -7,7 +7,7 @@ import { googleSignin, userLogin,restLogin } from '../../services/api';
 
 
 export default function Login() {
-  const {open, setOpen, loginOpen, setLoginOpen,loggedIn,setloggedIn} = useContext(SignupContext);
+  const {open, setOpen, loginOpen, setLoginOpen,loggedIn,setloggedIn, user, setuser} = useContext(SignupContext);
   const [status, setStatus] = useState("user");
   
   const [userbtn, setuserbtn] = useState("megenta-400")
@@ -58,13 +58,12 @@ export default function Login() {
     e.preventDefault()
     if(status==="user"){
       Promise.resolve(userLogin({userName:uname,password:upass})).then((res)=>
-      {
-        
+      { 
         localStorage.setItem("token",res.data.token)
         if(res.data.user==="user"){
           setLoginOpen(!loginOpen);
           setloggedIn(true);
-        console.log(loggedIn);
+          setuser(res.data.details)
       }
       else{
         setLoginOpen(!loginOpen);

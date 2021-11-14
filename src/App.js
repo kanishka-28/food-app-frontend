@@ -5,7 +5,7 @@ import Temp from './component/temp';
 import HomeHOC from './HOC/Home.HOC';
 import RestaurantHOC from './HOC/RestaurantHOC';
 import RestaurantMaster from "./component/Master/RestaurantMaster";
-import SignupApi from './context/signup';
+import SignupState from './context/signup';
 
 //axios default settings 
 axios.defaults.baseURL = 'http://localhost:4000'; 
@@ -18,11 +18,11 @@ function App() {
 
   return (
     <>
-      <SignupApi>
+      <SignupState>
       <HomeHOC path="/" exact component={Temp} />
       <HomeHOC key="home" path="/home/:type" exact component={Master} />
       <RestaurantHOC key="restaurant" path="/restaurant/:type" exact component={RestaurantMaster} />           
-      </SignupApi>
+      </SignupState>
     </>
   );
 }
