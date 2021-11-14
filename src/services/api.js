@@ -1,4 +1,5 @@
 import axios from "axios"
+import { Router } from "react-router-dom";
 
 export const userLogin=async (data)=>{
     return await axios.post("/auth/signin",{credentials:  data});
@@ -70,6 +71,15 @@ export const allOrdersRes = async (id)=>{
 }
 export const deleteorder = async (id, orderId)=>{
     return await axios.delete(`/order/delete/${id}/${orderId}`, {
+        headers:{
+            token: localStorage.getItem("token")
+        }
+    })
+}
+
+export const updateRes=(data)=>{
+    console.log(data);
+    return axios.put(`restaurant/updaterestaurant/${data.id}`,data,{
         headers:{
             token: localStorage.getItem("token")
         }

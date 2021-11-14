@@ -1,18 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { SignupContext } from '../../../context/signup';
 
 
-const Images = [
-   "https://b.zmtcdn.com/data/pictures/chains/6/2600026/bd8dfea96f558f70726e9adeea69ad59.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
-   "https://b.zmtcdn.com/data/pictures/chains/6/2600026/bd8dfea96f558f70726e9adeea69ad59.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
-   "https://b.zmtcdn.com/data/pictures/chains/6/2600026/bd8dfea96f558f70726e9adeea69ad59.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
-   "https://b.zmtcdn.com/data/pictures/chains/6/2600026/bd8dfea96f558f70726e9adeea69ad59.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
-   "https://b.zmtcdn.com/data/pictures/chains/6/2600026/bd8dfea96f558f70726e9adeea69ad59.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
-   "https://b.zmtcdn.com/data/pictures/chains/6/2600026/bd8dfea96f558f70726e9adeea69ad59.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
-   "https://b.zmtcdn.com/data/pictures/chains/6/2600026/bd8dfea96f558f70726e9adeea69ad59.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
-   "https://b.zmtcdn.com/data/pictures/chains/6/2600026/bd8dfea96f558f70726e9adeea69ad59.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
-]
 
-export const Photo = () => {
+
+export const Photo = ({details}) => {
+  console.log(details);
+  const Images = details.photos;
     return (
         <div className="bg-white rounded-md flex flex-wrap justify-evenly pb-6 w-full">
             {
@@ -32,9 +26,14 @@ export const Photo = () => {
 
 
 const Photos = () => {
+  
+  const {restaurant, setrestaurant} = useContext(SignupContext);
+  const param= localStorage.getItem("id");
+  const requiredRestaurant= restaurant.filter((res)=>(res._id===param))[0];
+  console.log(requiredRestaurant);
     return (
         <div className="lg:px-32 hidden md:block">
-            <Photo/>
+            <Photo details={requiredRestaurant}/>
         </div>
     )
 }

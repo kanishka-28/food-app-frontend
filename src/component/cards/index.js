@@ -18,8 +18,8 @@ const AllCards = () => {
             <div className="md:hidden mb-24">
                 {
                     restaurant.map(oneRestaurant=>{
-                       
-                        return <FoodCards name={oneRestaurant.name} city={oneRestaurant.city} photos={oneRestaurant.photos} />
+                       console.log(oneRestaurant);
+                        return <FoodCards name={oneRestaurant.name} city={oneRestaurant.city} photos={oneRestaurant.photos} about={oneRestaurant._id} />
                         
                         
                     })
@@ -34,7 +34,7 @@ const AllCards = () => {
                         return (
                             <div className="w-1/4">
 
-                                <FoodCards name={oneRestaurant.name} city={oneRestaurant.city} photos={oneRestaurant.photos} />
+                                <FoodCards name={oneRestaurant.name} city={oneRestaurant.city} photos={oneRestaurant.photos} about={oneRestaurant._id} />
                             </div>
                         )
                         
