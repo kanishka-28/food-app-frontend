@@ -77,6 +77,7 @@ export default function Signup() {
   }
   const handleSignUpAsUser = () => {
     setStatus("user");
+    console.log(status);
     setdisplayuser("block")
     setdisplayrest("hidden")
     setuserbtn("megenta-500")
@@ -85,6 +86,7 @@ export default function Signup() {
   const handleSignUpAsRestaurant = () => {
     setStatus("restaurant");
     setdisplayrest("block")
+    console.log(status);
     setdisplayuser("hidden")
     setresbtn("megenta-500")
     setuserbtn("megenta-400")
@@ -205,7 +207,7 @@ export default function Signup() {
                         </div>
                         <form className={`my-6 ${displayuser}`}>
                           <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uName} />
-                          <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uPass}/>
+                          <input type="password" placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uPass}/>
                           <input placeholder="Address" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uAddress} />
                           <input placeholder="City" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uCity} />
                         </form>
