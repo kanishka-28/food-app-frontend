@@ -4,7 +4,7 @@ import { BsFillArrowRightCircleFill, BsCompass, BsClock, BsCheckCircleFill } fro
 
 import { Link } from 'react-router-dom';
 
-import { Fragment, useRef, useState, useEffect, useContext } from 'react'
+import { Fragment, useRef, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { FcGoogle } from "react-icons/fc"
 import { AiOutlineClose } from "react-icons/ai";
