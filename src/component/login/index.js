@@ -3,10 +3,11 @@ import { Dialog, Transition } from '@headlessui/react'
 import  { SignupContext } from "../../context/signup";
 import { FcGoogle } from "react-icons/fc"
 import { AiOutlineClose } from "react-icons/ai";
-import { restLogin, userLogin } from '../../services/api';
+import { googleSignin, userLogin,restLogin } from '../../services/api';
+
 
 export default function Login() {
-  const {open, setOpen, loginOpen, setLoginOpen,setloggedIn} = useContext(SignupContext);
+  const {open, setOpen, loginOpen, setLoginOpen,loggedIn,setloggedIn} = useContext(SignupContext);
   const [status, setStatus] = useState("user");
   
   const [userbtn, setuserbtn] = useState("megenta-400")
@@ -54,32 +55,48 @@ export default function Login() {
     setuserbtn("megenta-400")
   }
   const handleUserSignin=(e)=>{
-    console.log(status);
+    e.preventDefault()
     if(status==="user"){
-      e.preventDefault()
       Promise.resolve(userLogin({userName:uname,password:upass})).then((res)=>
-      {localStorage.setItem("token",res.data.token)
-      if(res.data.user==="user"){
+      {
+        
+        localStorage.setItem("token",res.data.token)
+        if(res.data.user==="user"){
+          setLoginOpen(!loginOpen);
+          setloggedIn(true);
+        console.log(loggedIn);
+      }
+      else{
         setLoginOpen(!loginOpen);
         setloggedIn(true);
+        //history.push restaurant part
       }
     })
     .catch((e)=>{
+      
+      console.log(e.response);
       seterror(e.response.data.error);
       setInterval(() => {
         seterror("")
       }, 5000);
       // console.log(e.response)
     })
-  }
-  else if(status==="restaurant"){
-    e.preventDefault()
+    }
+    else if(status==="restaurant"){
+      e.preventDefault()
       Promise.resolve(restLogin({name: rname, city: rcity})).then((res)=>{
         console.log(res);
         Promise.resolve(userLogin({userName:oname,password:opass})).then((res)=>{
           {localStorage.setItem("token",res.data.token)}
           setloggedIn(true)
           setLoginOpen(false)
+        }).catch((e)=>{
+          seterror(e.response.data.error);
+          setInterval(() => {
+            seterror("")
+          }, 5000);
+          console.log(e.response)
+        })
       }).catch((e)=>{
         seterror(e.response.data.error);
         setInterval(() => {
@@ -87,16 +104,20 @@ export default function Login() {
         }, 5000);
         console.log(e.response)
       })
+
+    }
+  }
+  const googleLogin= async ()=>{
+    await googleSignin().then((res)=>{
+      console.log(res);
     }).catch((e)=>{
-      seterror(e.response.data.error);
+      seterror(e);
       setInterval(() => {
         seterror("")
       }, 5000);
-      console.log(e.response)
     })
   }
 
-  }
   return (
     <Transition.Root show={loginOpen} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setLoginOpen}>
@@ -169,7 +190,7 @@ export default function Login() {
                          
                         <button onClick={handleUserSignin} className={`border border-gray-300 rounded-md font-semibold w-full h-12 bg-megenta-400 text-white`}>Sign in </button>
                       <p className="m-4 font-dark text-xl">Or</p>
-                      <button className="w-full h-12 text-center text-semibold text-lg border border-gray-300 py-1 bg-white flex justify-center items-center gap-2"><FcGoogle className="w-8 h-8"/><p>Login With Google</p></button>
+                      <button onClick={googleLogin} className="w-full h-12 text-center text-semibold text-lg border border-gray-300 py-1 bg-white flex justify-center items-center gap-2"><FcGoogle className="w-8 h-8"/><p>Login With Google</p></button>
                     </div>
                   </div>
                 </div>

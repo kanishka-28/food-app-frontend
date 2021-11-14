@@ -10,6 +10,7 @@ export const restLogin=async (data)=>{
         }
     });
 }
+
 export const signupApi = (credentials)=>{
     return axios.post("/auth/signup", {credentials})
 }
@@ -20,6 +21,32 @@ export const orderfood = async (orderDetails)=>{
     return await axios.post(`/order/new/${orderDetails.id}`, orderDetails, {
         headers:{
             token: localStorage.getItem("token")
+        }
+    })
+}
+
+export const googleSignin=()=>{
+    return axios.get("/auth/google",{ headers: { 'Content-Type': 'application/json'}});
+}
+
+export const getRestaurant=()=>{
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(showPos);
+    }
+    let x,y
+    function showPos(position){
+        console.log(position.coords.latitude);
+        console.log(position.coords.longitude);
+         x=position.coords.latitude
+         y=position.coords.longitude
+        
+        
+    }
+    return axios.get("/restaurant",{
+        headers: {token: localStorage.getItem("token")},
+        params:{
+            latitude:x,
+            longitude:y
         }
     })
 }

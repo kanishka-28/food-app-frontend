@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-const FoodCards = () => {
+const FoodCards = ({name, city, photos}) => {
+    console.log(name);
     return (
         <div className="w-full h-full my-4 rounded-lg shadow-lg relative ">
             <Link to="/restaurant/overview">
                 <div className="rounded-lg shadow">
-                    <img src="https://b.zmtcdn.com/data/pictures/3/1400503/33cd8b55cb8da36d780932988a56ebde_o2_featured_v2.jpg" className="w-full h-full rounded-lg shadow-md" alt="card" />
+                    <img src={(photos && photos.length>0)? photos[0]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLoeVu-1OtdDQVJnSFlXBXWZfOvkLG-GBAHLVJHJKZt7AtJay6gxoCBN9k8VKhy1vSaGs&usqp=CAU"} className="w-full h-full rounded-lg shadow-md" alt="card" />
                 </div>
             </Link>
             <div className="text-sm text-white font-semibold absolute z-10 top-32 l-0">
@@ -13,11 +14,11 @@ const FoodCards = () => {
                 <div className="bg-blue-500 w-24 h-5 my-2 px-1">40% Off</div>
             </div>
             <div className="flex justify-between m-2">
-                <h1 className="font-bold font-medium">Rasgulla House</h1>
+                <h1 className="font-bold font-medium">{name}</h1>
                 <div className="bg-green-600 rounded-lg text-white p-0.5">4.3⭐</div>
             </div>
             <div className="flex justify-between m-2">
-                <div className="text-gray-600 font-small text-center">Mithai</div>
+                <div className="text-gray-600 font-small text-center">{city}</div>
                 <div className="text-gray-600 font-small text-center">₹ 100 for one</div>
             </div>
             <div className="flex justify-evenly m-2">

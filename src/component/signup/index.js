@@ -30,6 +30,7 @@ export default function Signup() {
   const [oemail, setoemail] = useState("")
   const [latit, setlatit] = useState("")
   const [longi, setlongi] = useState("")
+  const [error, seterror] = useState("")
   const history = useHistory();
   const uName = (e) => {
     setuname(e.target.value)
@@ -90,7 +91,8 @@ export default function Signup() {
     setresbtn("megenta-500")
     setuserbtn("megenta-400")
   }
-  const clickHandler=()=>{
+  const clickHandler=(e)=>{
+    e.preventDefault();
     if(status==="user"){
       const credentials = {
         userName: uname, 
@@ -99,14 +101,18 @@ export default function Signup() {
         city: ucity,
         status: status
       }
-      console.log(credentials);
+   
       Promise.resolve(signupApi(credentials)).then((res)=>{
         console.log(res);
         localStorage.setItem("token", res.data.token)
         setloggedIn(true)
         setOpen(false)
       }).catch((e)=>{
-        console.log({e});
+        console.log(e.response);
+        seterror(e.response.data.error);
+        setTimeout(() => {
+          seterror("")
+        }, 5000);
       })
       }
     if(status==="restaurant"){
@@ -221,11 +227,9 @@ export default function Signup() {
                           <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oPass} />
                           <input placeholder="Email" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oEmail} />
                         </form>
+                        <p className="text-md" >{error}</p>
                         <button className={`border border-gray-300 font-semibold w-full h-12 bg-${bgColor} `} onClick={clickHandler}>Create Account</button>
-                        <p className="m-4 font-dark text-xl">Or</p>
-                        <div className="flex justify-center">
-                          <button className="w-full h-12 text-center text-semibold text-lg border-2 border-gray-300 py-1 bg-white flex justify-center items-center gap-2"><FcGoogle className="w-8 h-8" /><p>Continue With Google</p></button>
-                        </div>
+                        
                       </div>
                     </div>
                   </div>
