@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { GiScooter } from 'react-icons/gi';
 import { BsFillArrowRightCircleFill, BsCompass, BsClock, BsCheckCircleFill } from 'react-icons/bs'
 
@@ -10,13 +10,14 @@ import { FcGoogle } from "react-icons/fc"
 import { AiOutlineClose } from "react-icons/ai";
 import { orderfood } from '../../../services/api';
 import { useHistory } from 'react-router';
+import { SignupContext } from '../../../context/signup';
 
 const Order = () => {
 
     const [price, setprice] = useState()
-
+    const {user} = useContext(SignupContext)
     const placeOrder=()=>{
-        const id = "619094b7ae7ed2aad609abd2"
+        const id = user._id
         const orderDetails = {
             restaurant: "618f3e11ad466d30f38d37f4",
             food: "618f40f84ec908776bb129fd",

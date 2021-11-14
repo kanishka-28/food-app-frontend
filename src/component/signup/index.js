@@ -131,18 +131,19 @@ export default function Signup() {
           latitude: latit,
           longitude: longi
         }
-      })).then((res)=>{
-        console.log(res);
-        Promise.resolve(signupApi(credentials)).then((res)=>{
-          console.log(res);
-          localStorage.setItem("token", res.data.token)
+      })).then((res1)=>{
+        console.log(res1);
+        Promise.resolve(signupApi(credentials)).then((res2)=>{
+          console.log(res2);
+          localStorage.setItem("token", res2.data.token)
           setloggedIn(true)
           setOpen(false)
+          // history.push()
         }).catch((e)=>{
-          console.log({e});
+          console.log(e.response);
         })
       }).catch((e)=>{
-        console.log({e});
+        console.log(e.response);
       })
       }
     }
@@ -214,7 +215,7 @@ export default function Signup() {
                         <form className={`my-6 ${displayrest}`}>
                           <h1 className="text-2xl font-semibold my-6 flex flex-start">Restaurant Details</h1>
                           <input placeholder="Restaurant Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rName} />
-                          <input placeholder="Contact Number" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rPhone} />
+                          <input type="tel" placeholder="Contact Number" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rPhone} />
                           <input placeholder="Address" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rAddress} />
                           <input placeholder="City" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={rCity} />
                           <div className="flex items-center">
@@ -224,7 +225,7 @@ export default function Signup() {
                           </div>                            
                           <h1 className="text-2xl font-semibold my-6 flex flex-start">Restaurant Owner Details</h1>
                           <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oName} />
-                          <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oPass} />
+                          <input type="password" placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oPass} />
                           <input placeholder="Email" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oEmail} />
                         </form>
                         <p className="text-md" >{error}</p>
