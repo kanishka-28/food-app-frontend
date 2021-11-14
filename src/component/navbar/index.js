@@ -8,7 +8,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { Link } from 'react-router-dom';
 const ProfileDisclosure = () => {
     
-    const { loggedIn, setloggedIn } = useContext(SignupContext);
+    const { loggedIn, setloggedIn , setuser} = useContext(SignupContext);
 
     return (
         <Menu as="div" className="ml-3 relative">
@@ -40,7 +40,8 @@ const ProfileDisclosure = () => {
                                     console.log(loggedIn);
                                     setloggedIn(false);
                                     console.log(loggedIn);
-                                    
+                                    setuser({})
+                                    localStorage.removeItem("user")
                                 }}
                                 className={(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}>
                                 Sign out

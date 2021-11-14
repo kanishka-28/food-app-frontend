@@ -1,13 +1,3 @@
-// import React from 'react'
-// import  Map from "../restaurantComponent/overview/googleMap";
-// export const RestaurantMaster = () => {
-//     return (
-//         <div>
-//             hehe
-//             <Map/>
-//         </div>
-//     )
-// }
 import React from "react";
 import { useParams } from "react-router-dom";
 

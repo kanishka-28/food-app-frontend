@@ -46,3 +46,32 @@ export const getRestaurant=()=>{
         }
     })
 }
+
+export const addfood = async (foodDetails, id)=>{
+    return await axios.post(`/food/addfood/${id}`, foodDetails, {
+        headers:{
+            token: localStorage.getItem("token")
+        }
+    })
+}
+export const getfood = async (id)=>{
+    return await axios.get(`/food/${id}`, {
+        headers:{
+            token: localStorage.getItem("token")
+        }
+    })
+}
+export const allOrdersRes = async (id)=>{
+    return await axios.get(`/order/res/${id}`, {
+        headers:{
+            token: localStorage.getItem("token")
+        }
+    })
+}
+export const deleteorder = async (id, orderId)=>{
+    return await axios.delete(`/order/delete/${id}/${orderId}`, {
+        headers:{
+            token: localStorage.getItem("token")
+        }
+    })
+}

@@ -7,7 +7,7 @@ import { addrest, signupApi } from '../../services/api';
 import { useHistory } from 'react-router';
 
 export default function Signup() {
-  const {open, setOpen,loginOpen, setLoginOpen,loggedIn, setloggedIn } = useContext(SignupContext);
+  const {open, setOpen,loginOpen, setLoginOpen,loggedIn, setloggedIn, setuser } = useContext(SignupContext);
   const cancelButtonRef = useRef(null)
   const [status, setStatus] = useState("user");
   const [bgColor, setBgColor] = useState("gray-300")
@@ -101,11 +101,11 @@ export default function Signup() {
         city: ucity,
         status: status
       }
-   
       Promise.resolve(signupApi(credentials)).then((res)=>{
         console.log(res);
         localStorage.setItem("token", res.data.token)
         setloggedIn(true)
+        setuser(res.data.details)
         setOpen(false)
       }).catch((e)=>{
         console.log(e.response);
@@ -114,7 +114,7 @@ export default function Signup() {
           seterror("")
         }, 5000);
       })
-      }
+    }
     if(status==="restaurant"){
       const credentials = {
         userName: oname, 
@@ -137,6 +137,7 @@ export default function Signup() {
           console.log(res2);
           localStorage.setItem("token", res2.data.token)
           setloggedIn(true)
+          setuser(res2.data.details)
           setOpen(false)
           // history.push()
         }).catch((e)=>{

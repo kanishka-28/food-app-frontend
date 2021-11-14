@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import Delivery from '../Delivery/index'
 import DiningOut from '../DiningOut';
 import Nightlife from '../Nightlife';
+import AddFood from '../ownersTab/addFood';
+import AllOrders from '../ownersTab/allOrders';
 
 export default function Master() {
     const {type} = useParams();
@@ -18,6 +20,12 @@ export default function Master() {
         </div>
         <div className="m-4">
             {type==="dining" && <DiningOut/>}   
+        </div>
+        <div className="m-4">
+            {type === "addFood" && <AddFood/> }
+        </div>
+        <div className="m-4">
+            {type === "allOrders" && <AllOrders/> }
         </div>
         </>
     )

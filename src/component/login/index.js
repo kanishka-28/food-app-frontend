@@ -63,19 +63,18 @@ export default function Login() {
         localStorage.setItem("token",res.data.token)
         if(res.data.user==="user"){
           setLoginOpen(!loginOpen);
-          setloggedIn(true);
           setuser(res.data.details)
+          localStorage.setItem("user", JSON.stringify(res.data.details))
+          setloggedIn(true);
       }
       else{
         setLoginOpen(!loginOpen);
         setloggedIn(true);
-        //history.push restaurant part
       }
     })
     .catch((e)=>{
-      
       console.log(e.response);
-      seterror(e.response.data.error);
+      // seterror(e.response);
       setInterval(() => {
         seterror("")
       }, 5000);
@@ -84,10 +83,11 @@ export default function Login() {
     }
     else if(status==="restaurant"){
       e.preventDefault()
-      Promise.resolve(restLogin({name: rname, city: rcity})).then((res)=>{
+      Promise.resolve(userLogin({userName:oname,password:opass})).then((res)=>{
         console.log(res);
-        Promise.resolve(userLogin({userName:oname,password:opass})).then((res)=>{
-          {localStorage.setItem("token",res.data.token)}
+        {localStorage.setItem("token",res.data.token)}
+        localStorage.setItem("user", JSON.stringify(res.data.details))
+        Promise.resolve(restLogin({name: rname, city: rcity})).then((res)=>{
           setloggedIn(true)
           setLoginOpen(false)
         }).catch((e)=>{

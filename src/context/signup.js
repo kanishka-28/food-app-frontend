@@ -29,7 +29,7 @@ const SignupState = (props) => {
             }, 5000);
         })
     }, [loggedIn,])
-    
+
     return (
         <SignupContext.Provider  value={{open,setOpen, loginOpen, setLoginOpen,loggedIn, setloggedIn,restaurant, setrestaurant, error, seterror, user, setuser, status, setstatus}} >
            <Signup/>
