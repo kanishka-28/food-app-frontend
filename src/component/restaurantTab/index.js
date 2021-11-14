@@ -17,12 +17,7 @@ const MdTab = () => {
             isActive: false
 
         },
-        {
-            id: `reviews`,
-            name: "Reviews",
-            isActive: false
-
-        },
+       
         {
             id: `menu`,
             name: "Menu",
@@ -42,7 +37,7 @@ const MdTab = () => {
             {
                 allTypes.map((item) => {
                     return (
-                        <Link to={`/restaurant/${item.id}`}>
+                        <Link to={`/restaurant/${item.id}/${localStorage.getItem("id")}`}>
 
                             <div className={
                                 type === item.id || (type === undefined && item.id === "overview") ? " pt-4 pb-2 px-6  text-xl text-zomato-400 border-b-2 border-zomato-400 " : " pt-4 px-6 pb-2  text-lg"

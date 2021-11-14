@@ -7,7 +7,7 @@ import { googleSignin, userLogin,restLogin } from '../../services/api';
 
 
 export default function Login() {
-  const {open, setOpen, loginOpen, setLoginOpen,loggedIn,setloggedIn, user, setuser} = useContext(SignupContext);
+  const {open, setOpen, loginOpen, setLoginOpen,loggedIn,setloggedIn, user, setuser,specificRestaurant, setsepecificRestaurant} = useContext(SignupContext);
   const [status, setStatus] = useState("user");
   
   const [userbtn, setuserbtn] = useState("megenta-400")
@@ -86,13 +86,14 @@ export default function Login() {
       e.preventDefault()
       Promise.resolve(restLogin({name: rname, city: rcity})).then((res)=>{
         console.log(res);
+        localStorage.setItem("restaurant",JSON.stringify(res.data.result)) 
         Promise.resolve(userLogin({userName:oname,password:opass})).then((res)=>{
           {localStorage.setItem("token",res.data.token)}
           setloggedIn(true)
           setLoginOpen(false)
         }).catch((e)=>{
           seterror(e.response.data.error);
-          setInterval(() => {
+          setTimeout(() => {
             seterror("")
           }, 5000);
           console.log(e.response)

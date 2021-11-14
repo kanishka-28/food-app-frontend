@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-const FoodCards = ({name, city, photos}) => {
-   
+const FoodCards = ({name, city, photos,about}) => {
+   console.log(about);
     return (
         <div className="w-full h-full my-4 rounded-lg shadow-lg relative ">
-            <Link to="/restaurant/overview">
+            <Link to={`/restaurant/overview/${about}`}>
                 <div className="rounded-lg shadow">
                     <img src={(photos && photos.length>0)? photos[0]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLoeVu-1OtdDQVJnSFlXBXWZfOvkLG-GBAHLVJHJKZt7AtJay6gxoCBN9k8VKhy1vSaGs&usqp=CAU"} className="w-full h-full rounded-lg shadow-md" alt="card" />
                 </div>

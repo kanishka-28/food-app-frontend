@@ -1,6 +1,7 @@
 import React,{createContext,useState,useEffect} from 'react'
 import Login from '../component/login';
 import Signup from '../component/signup';
+import UpdateRestaurant from '../component/updateRestaurant/Index';
 import { getRestaurant } from '../services/api';
 export const SignupContext= createContext(); 
 
@@ -16,8 +17,9 @@ const SignupState = (props) => {
     const [restaurant, setrestaurant] = useState([])
     const [status, setstatus] = useState("")
     const [user, setuser] = useState({})
-
+    const [specificRestaurant, setsepecificRestaurant] = useState({})
     useEffect(() => {
+        
         
         
         getRestaurant().then((res)=>{
@@ -32,11 +34,12 @@ const SignupState = (props) => {
                 seterror(null)
             }, 5000);
         })
-    }, [loggedIn,])
+    }, [loggedIn])
     return (
-        <SignupContext.Provider  value={{open,setOpen, loginOpen, setLoginOpen,loggedIn, setloggedIn,restaurant, setrestaurant, error, seterror, user, setuser, status, setstatus}} >
+        <SignupContext.Provider  value={{open,setOpen, loginOpen, setLoginOpen,loggedIn, setloggedIn,restaurant, setrestaurant, error, seterror, user, setuser, status, setstatus,specificRestaurant, setsepecificRestaurant}} >
            <Signup/>
            <Login/>
+          
             {props.children}
         </SignupContext.Provider>
     )

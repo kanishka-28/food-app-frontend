@@ -24,9 +24,8 @@ function App() {
       <HomeHOC path="/" exact component={Temp} />
       <HomeHOC path="/updaterestaurant" exact component={UpdateRestaurant} />
       <HomeHOC key="home" path="/home/:type" exact component={Master} />
-      <RestaurantHOC key="restaurant" path="/restaurant/:type" exact component={RestaurantMaster} />           
-      <Route key="updaterestaurant" path="/updatereastaurant" exact >
-        </Route>
+      <RestaurantHOC key="restaurant" path="/restaurant/:type/:id" exact component={RestaurantMaster} />           
+      
       </SignupState>
     </>
   );

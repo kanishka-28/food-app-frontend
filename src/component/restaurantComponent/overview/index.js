@@ -1,10 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import GoogleMap from './googleMap';
 import { FiCheckCircle, FiCopy } from "react-icons/fi"
 import { RiDirectionLine, RiArrowUpSFill } from "react-icons/ri"
+import { SignupContext } from '../../../context/signup';
+import { useParams } from 'react-router-dom';
 
 const OverviewSm= ()=>{
-    const [color, setColor] = useState("text-gray-500")
+    const [color, setColor] = useState("text-gray-500");
+    const {restaurant, setrestaurant} = useContext(SignupContext);
+    const param= useParams().id;
+    console.log(param);
+    localStorage.setItem("id",param);
+    const requiredRestaurant= restaurant.filter((res)=>(res._id===param))[0];
+    console.log(requiredRestaurant);
     const address = "Shop 1, Chatrapati Shivaji Colony, Chuna Bhatti, Arera Colony, Bhopal";
     const copy = () => {
         setColor("text-green-500")
@@ -76,8 +84,8 @@ const OverviewSm= ()=>{
                     <div className="w-full">
                         <div className="my-3 mx-2">
                             <p className="text-xl text-gray-700 mb-2">Call</p>
-                            <p className="text-red-500">6353728210</p>
-                            <p className="text-red-500">6353728210</p>
+                            <p className="text-red-500">{requiredRestaurant.contactNumber}</p>
+                            
                         </div>
                         <div className="h-2/3 my-1 mx-2 ">
                             <p className="text-xl text-gray-700 mb-2">Direction</p>
@@ -109,7 +117,11 @@ const OverviewMd=()=>{
             setColor("text-gray-500")
         ), [1000])
     }
-
+    const {restaurant, setrestaurant} = useContext(SignupContext);
+    const param= useParams().id;
+    console.log(param);
+    const requiredRestaurant= restaurant.filter((res)=>(res._id===param))[0];
+    console.log(requiredRestaurant);
     const [display, setDisplay] = useState("hidden")
     const quesBoxShow = () => {
         setDisplay("block")
@@ -172,8 +184,7 @@ const OverviewMd=()=>{
                     <div className="w-full">
                         <div className="my-3 mx-8">
                             <p className="text-xl text-gray-700 mb-2">Call</p>
-                            <p className="text-red-500">6353728210</p>
-                            <p className="text-red-500">6353728210</p>
+                            <p className="text-red-500">{requiredRestaurant.contactNumber}</p>
                         </div>
                         <div className="h-2/3 my-1 mx-8">
                             <p className="text-xl text-gray-700 mb-2">Direction</p>

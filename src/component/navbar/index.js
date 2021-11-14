@@ -8,7 +8,8 @@ import { Menu, Transition } from "@headlessui/react";
 import { Link } from 'react-router-dom';
 const ProfileDisclosure = () => {
     
-    const { loggedIn, setloggedIn } = useContext(SignupContext);
+    const { loggedIn, setloggedIn, status } = useContext(SignupContext);
+    console.log(status);
 
     return (
         <Menu as="div" className="ml-3 relative">
