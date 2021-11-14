@@ -40,17 +40,15 @@ export default function Login() {
     setopass(e.target.value)
   }
   const handleSignInAsUser = () => {
-    setStatus("restaurant");
-    console.log(status);
+    setStatus("user");
     setdisplayuser("block")
     setdisplayrest("hidden")
     setuserbtn("megenta-500")
     setresbtn("megenta-400")
   }
   const handleSignInAsRestaurant = () => {
-    setStatus("user");
+    setStatus("restaurant");
     setdisplayrest("block")
-    console.log(status);
     setdisplayuser("hidden")
     setresbtn("megenta-500")
     setuserbtn("megenta-400")
@@ -75,41 +73,29 @@ export default function Login() {
     })
   }
   else if(status==="restaurant"){
-    // e.preventDefault()
-    // Promise.resolve(userLogin({userName:uname,password:upass})).then((res)=>
-    //   {localStorage.setItem("token",res.data.token)
-    //   if(res.data.user==="user"){
-    //     setLoginOpen(!loginOpen);
-    //     setloggedIn(true);
-    //   }
-    //   })
-    //   .catch((e)=>{
-    //     seterror(e.response.data.error);
-    //     setInterval(() => {
-    //       seterror("")
-    //     }, 5000);
-    //     // console.log(e.response)
-    //   })
-    console.log("nhi");
-    }
-      // Promise.resolve(userLogin({userName:oname,password:opass})).then((res)=>{
-      // {localStorage.setItem("token",res.data.token)}  
-      //   console.log(res)
-        // Promise.resolve(restLogin({name: rname, city: rcity})).then((res)=>{
-        //   console.log(res);
-        //   setloggedIn(true)
-        //   setLoginOpen(false)
-        // })
-    //   }).catch((e)=>{
-    //       setloggedIn(true)
-    //       setLoginOpen(false)
-    //     seterror(e.response.data.error);
-    //     setInterval(() => {
-    //       seterror("")
-    //     }, 5000);
-    //     // console.log(e.response)
-    //   })
-    // }
+    e.preventDefault()
+      Promise.resolve(restLogin({name: rname, city: rcity})).then((res)=>{
+        console.log(res);
+        Promise.resolve(userLogin({userName:oname,password:opass})).then((res)=>{
+          {localStorage.setItem("token",res.data.token)}
+          setloggedIn(true)
+          setLoginOpen(false)
+      }).catch((e)=>{
+        seterror(e.response.data.error);
+        setInterval(() => {
+          seterror("")
+        }, 5000);
+        console.log(e.response)
+      })
+    }).catch((e)=>{
+      seterror(e.response.data.error);
+      setInterval(() => {
+        seterror("")
+      }, 5000);
+      console.log(e.response)
+    })
+  }
+
   }
   return (
     <Transition.Root show={loginOpen} as={Fragment}>
@@ -163,7 +149,7 @@ export default function Login() {
                       <form className={`my-6 ${displayuser}`}>
                           <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uName} value={uname} />
                           <input type="password" placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={uPass} value={upass} />
-                      <button onClick={handleUserSignin} className={`border border-gray-300 rounded-md font-semibold w-full h-12 bg-megenta-400 text-white`}>Sign in </button>
+                      
                       <div className="h-10" >
                           <p className="text-md" >{error}</p>
 
@@ -178,11 +164,10 @@ export default function Login() {
                           <h1 className="text-2xl font-semibold my-6 flex flex-start">Restaurant Owner Details</h1>
                           <input placeholder="Full Name" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oName} />
                           <input placeholder="Password" className="p-4 my-2 w-full h-12 focus:border-none focus:outline-none focus:ring-1 focus:ring-black  border border-gray-300 rounded-md" onChange={oPass} />
-                      <button className={`border border-gray-300 rounded-md font-semibold w-full h-12 bg-megenta-400 text-white`}>Sign in</button>
                           
                         </form>
                          
-                      
+                        <button onClick={handleUserSignin} className={`border border-gray-300 rounded-md font-semibold w-full h-12 bg-megenta-400 text-white`}>Sign in </button>
                       <p className="m-4 font-dark text-xl">Or</p>
                       <button className="w-full h-12 text-center text-semibold text-lg border border-gray-300 py-1 bg-white flex justify-center items-center gap-2"><FcGoogle className="w-8 h-8"/><p>Login With Google</p></button>
                     </div>
