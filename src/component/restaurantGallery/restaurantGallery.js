@@ -3,7 +3,7 @@ import React from 'react'
     import {HiOutlineInformationCircle} from "react-icons/hi"
     import { AiTwotoneStar } from "react-icons/ai";
     import { GiSevenPointedStar } from "react-icons/gi";
-import { MobOrder } from '../restaurantComponent/order';
+// import { MobOrder } from '../restaurantComponent/order';
 import {Photo} from '../restaurantComponent/photos';
     const MobileFoodDetails = () => {
         return (
@@ -32,7 +32,7 @@ import {Photo} from '../restaurantComponent/photos';
                         <h2 className="text-gray-500 my-0.5">Bhawar Kuan, Indore</h2>
                         <p className="text-gray-600 my-0.5 flex gap-1 items-center"><h1>11am – 11pm (Today)</h1><HiOutlineInformationCircle className="pt-0.5 w-5 h-5 text-gray-400"/></p>
                     </div>
-                    <MobOrder/>
+                    {/* <MobOrder/> */}
                     <h1 className="m-2 font-light text-xl font-semibold">Pizza King Photos</h1>
                     <Photo/>
             </div>
