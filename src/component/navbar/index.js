@@ -37,7 +37,10 @@ const ProfileDisclosure = () => {
                             <button
                                 onClick={() => {
                                     localStorage.removeItem("token")
-                                    setloggedIn(!loggedIn)
+                                    console.log(loggedIn);
+                                    setloggedIn(false);
+                                    console.log(loggedIn);
+                                    
                                 }}
                                 className={(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}>
                                 Sign out
