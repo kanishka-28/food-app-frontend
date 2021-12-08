@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { addfood } from '../../services/api'
-
+import { SignupContext } from '../../context/signup'
 const AddFood = () => {
 
     const [food, setfood] = useState("")
@@ -10,14 +10,10 @@ const AddFood = () => {
     const [isVeg, setisVeg] = useState(false)
     const [isContainEgg, setisContainEgg] = useState(false)
 
-    useEffect(() => {
-        console.log(isVeg);
-        console.log(isContainEgg);
-        
-    }, [isVeg,isContainEgg])
 
     const clickHandler=()=>{
-        const id = (localStorage.getItem("id"));
+        const user = JSON.parse(localStorage.getItem("user"));
+        console.log();
         Promise.resolve(addfood({
             name: food,
             descript: des,
@@ -25,7 +21,7 @@ const AddFood = () => {
             isContainEgg,
             category: category,
             price: price
-        }, id)).then((res)=>{
+        }, user._id)).then((res)=>{
             console.log(res);
             setfood("")
             setcategory("")

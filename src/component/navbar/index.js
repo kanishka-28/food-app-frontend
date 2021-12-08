@@ -61,7 +61,7 @@ const MobileNav = () => {
         <div className="p-4 md:hidden flex items-center justify-between w-full ">
             <Link to="/">
                 <div className="w-28">
-                    <img className="w-full h-full" src="https://www.enukesoftware.com/blog/wp-content/uploads/2020/01/food-delivery-app-smartphone-with-foods-banner_40816-701.jpg" alt="logo" />
+                    <img className="w-full h-full" src="https://yt3.ggpht.com/ytc/AKedOLQcjMYalW_yII-YeLIMExAZ88R58Jw6VFUOJ1lK=s900-c-k-c0x00ffffff-no-rj" alt="logo" />
                 </div>
             </Link>
             <div className="flex items-center gap-3" >
@@ -96,8 +96,8 @@ const LgNav = () => {
         <div className="flex items-center py-4 justify-around w-full text-gray-400 hidden md:flex ">
             <div className="flex justify-around w-9/12 items-center">
                 <Link to="/">
-                    <div className="w-24 h-12">
-                        <img className="w-full h-full" src="https://www.enukesoftware.com/blog/wp-content/uploads/2020/01/food-delivery-app-smartphone-with-foods-banner_40816-701.jpg" alt="logo" />
+                    <div className="">
+                        <img className="w-42 h-36" src="https://yt3.ggpht.com/ytc/AKedOLQcjMYalW_yII-YeLIMExAZ88R58Jw6VFUOJ1lK=s900-c-k-c0x00ffffff-no-rj" alt="logo" />
                     </div>
                 </Link>
                 <div className="flex bg-white items-center px-2 gap-3 shadow-md">

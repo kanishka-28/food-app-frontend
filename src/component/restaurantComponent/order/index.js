@@ -156,8 +156,8 @@ const Order = () => {
                 </div>
                 <div className="flex bg-blue-600 text-white items-center rounded-md p-3 w-max">
                     <BsCheckCircleFill className="mr-2" />
-                    {/* <p>Delivering to : <strong>{user.address} {user.city}</strong></p> */}
-                    {/* <div className="pl-36">Change</div> */}
+                    <p>Delivering to : <strong>{user.address} {user.city}</strong></p>
+                    <div className="pl-36">Change</div>
                 </div>
                 {foods.length !== 0 ? foods.map((food) => (
                     <div className="flex justify-between items-center bg-yellow-100 border border-dashed border-gray-400 p-2 align-center my-2">

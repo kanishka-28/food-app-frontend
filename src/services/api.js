@@ -52,6 +52,7 @@ export const getRestaurant=()=>{
 }
 
 export const addfood = async (foodDetails, id)=>{
+    console.log(id);
     return await axios.post(`/food/addfood/${id}`, foodDetails, {
         headers:{
             token: localStorage.getItem("token")

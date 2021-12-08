@@ -60,7 +60,7 @@ import { useParams } from 'react-router-dom';
                 <div className="w-full ">
                     <div className="m-4  flex items-center w-full  ">
                         <div className="w-10/12 overflow-hidden  ">
-     
+    
                             <img src={requiredRestaurant.photos.length>0?requiredRestaurant.photos[0]:"https://b.zmtcdn.com/data/pictures/9/19227209/1f3b5f252dc37e874e8e96e82e5ed277.jpg?output-format=webp&fit=around|771.75:416.25&crop=771.75:416.25;*,*"} className="w-full h-full duration-1000 transform hover:scale-110" alt="bigImage"/>
 
                         </div>
