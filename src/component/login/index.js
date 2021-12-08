@@ -4,6 +4,7 @@ import  { SignupContext } from "../../context/signup";
 import { FcGoogle } from "react-icons/fc"
 import { AiOutlineClose } from "react-icons/ai";
 import { googleSignin, userLogin,restLogin } from '../../services/api';
+import LoginGoogle from '../googleLogin';
 
 
 export default function Login() {
@@ -21,13 +22,13 @@ export default function Login() {
   const [rcity, setrcity] = useState("")
   const [oname, setoname] = useState("")
   const [opass, setopass] = useState("")
+  const [error, seterror] = useState("")
   const uName = (e) => {
     setuname(e.target.value)
   }
   const uPass = (e) => {
     setupass(e.target.value)
   }
-  const [error, seterror] = useState("")
   const rName = (e) => {
     setrName(e.target.value)
   }
@@ -64,6 +65,7 @@ export default function Login() {
         if(res.data.user==="user"){
           setLoginOpen(!loginOpen);
           setuser(res.data.details)
+          window.location.reload();
           localStorage.setItem("user", JSON.stringify(res.data.details))
           setloggedIn(true);
       }
@@ -89,10 +91,10 @@ export default function Login() {
         localStorage.setItem("user", JSON.stringify(res.data.details))
         localStorage.setItem("restaurant",JSON.stringify(res.data.result)) 
         localStorage.setItem("token",res.data.token)
-        
         Promise.resolve(restLogin({name: rname, city: rcity})).then((res)=>{
           setloggedIn(true)
           setLoginOpen(false)
+          window.location.reload();
         }).catch((e)=>{
           seterror(e.response.data.error);
           setTimeout(() => {
@@ -109,16 +111,6 @@ export default function Login() {
       })
 
     }
-  }
-  const googleLogin= async ()=>{
-    await googleSignin().then((res)=>{
-      console.log(res);
-    }).catch((e)=>{
-      seterror(e);
-      setInterval(() => {
-        seterror("")
-      }, 5000);
-    })
   }
 
   return (
@@ -193,7 +185,7 @@ export default function Login() {
                          
                         <button onClick={handleUserSignin} className={`border border-gray-300 rounded-md font-semibold w-full h-12 bg-megenta-400 text-white`}>Sign in </button>
                       <p className="m-4 font-dark text-xl">Or</p>
-                      <button onClick={googleLogin} className="w-full h-12 text-center text-semibold text-lg border border-gray-300 py-1 bg-white flex justify-center items-center gap-2"><FcGoogle className="w-8 h-8"/><p>Login With Google</p></button>
+                      <LoginGoogle/>
                     </div>
                   </div>
                 </div>

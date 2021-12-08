@@ -107,6 +107,7 @@ export default function Signup() {
         setloggedIn(true)
         setuser(res.data.details)
         setOpen(false)
+        window.location.reload();
       }).catch((e)=>{
         console.log(e.response);
         seterror(e.response.data.error);
@@ -140,6 +141,7 @@ export default function Signup() {
           setloggedIn(true)
           setuser(res2.data.details)
           setOpen(false)
+          window.location.reload();
           // history.push()
         }).catch((e)=>{
           console.log(e.response);
