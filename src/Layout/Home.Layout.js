@@ -17,13 +17,13 @@ export default function HomeLayout(props) {
         </SignApi>
       </div>
       {
-        JSON.parse(!localStorage.getItem("user")) && <OwnerTab />
+        JSON.parse(!localStorage.getItem("user")) && <FoodTab />
       }
       {
-        JSON.parse(localStorage.getItem("user")) && .status === "user" && <FoodTab />
+        JSON.parse(localStorage.getItem("user")) && JSON.parse(localStorage.getItem("user")).status === "user" && <FoodTab />
       }
       {
-        JSON.parse(localStorage.getItem("user")).status === "restaurant" && <OwnerTab />
+        JSON.parse(localStorage.getItem("user")) && JSON.parse(localStorage.getItem("user")).status === "restaurant" && <OwnerTab />
       }
       <div className="container mx-auto lg:px-20">
         {props.children}
