@@ -6,7 +6,7 @@ const AllOrders = () => {
     const [state, setstate] = useState(false)
     const [orders, setorders] = useState([])
     useEffect(() => {
-        const id = "6190ae0d0da66e3c85cc2419"
+        const id = JSON.parse(localStorage.getItem("user"))._id;
         Promise.resolve(allOrdersRes(id)).then((res)=>{
             console.log(res);
             setorders(res.data.getOrders.orderDetails)

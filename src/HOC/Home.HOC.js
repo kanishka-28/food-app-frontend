@@ -13,7 +13,6 @@ export default function HomeHOC({component:Component, ...rest}) {
              <HomeLayout>
                  <Component {...props}/>
              </HomeLayout>
-
          )
          } 
          />

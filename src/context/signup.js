@@ -36,7 +36,6 @@ const SignupState = (props) => {
         <SignupContext.Provider  value={{open,setOpen, loginOpen, setLoginOpen,loggedIn, setloggedIn,restaurant, setrestaurant, error, seterror, user, setuser, status, setstatus,specificRestaurant, setsepecificRestaurant}} >
            <Signup/>
            <Login/>
-          
             {props.children}
         </SignupContext.Provider>
     )

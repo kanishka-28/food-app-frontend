@@ -5,11 +5,11 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { SignupContext } from "../../context/signup";
 import { Menu, Transition } from "@headlessui/react";
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 const ProfileDisclosure = () => {
     
     const { loggedIn, setloggedIn , setuser} = useContext(SignupContext);
-
+    const history = useHistory();
     return (
         <Menu as="div" className="ml-3 relative">
             <div>
@@ -37,11 +37,11 @@ const ProfileDisclosure = () => {
                             <button
                                 onClick={() => {
                                     localStorage.removeItem("token")
-                                    console.log(loggedIn);
                                     setloggedIn(false);
-                                    console.log(loggedIn);
                                     setuser({})
                                     localStorage.removeItem("user")
+                                    history.push("/");
+                                    window.location.reload();
                                 }}
                                 className={(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}>
                                 Sign out
@@ -93,7 +93,7 @@ const LgNav = () => {
 
     return (
 
-        <div className="flex items-center py-4 justify-around w-full text-gray-400 hidden md:flex ">
+        <div className="flex items-center py-1 justify-around w-full text-gray-400 hidden md:flex ">
             <div className="flex justify-around w-9/12 items-center">
                 <Link to="/">
                     <div className="">

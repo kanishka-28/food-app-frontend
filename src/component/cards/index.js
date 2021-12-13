@@ -6,9 +6,8 @@ import FoodCards from './FoodCards';
 
 const AllCards = () => {
         
-    
     const {loggedIn,setloggedIn, restaurant, error} = useContext(SignupContext);
-   console.log(restaurant);
+    console.log(restaurant);
     return (
         <>
         {
@@ -20,8 +19,6 @@ const AllCards = () => {
                     restaurant.map(oneRestaurant=>{
                        console.log(oneRestaurant);
                         return <FoodCards name={oneRestaurant.name} city={oneRestaurant.city} photos={oneRestaurant.photos} about={oneRestaurant._id} />
-                        
-                        
                     })
                 }
             </div>

@@ -75,19 +75,16 @@ export default function Login() {
       }
     })
     .catch((e)=>{
-      console.log(e.response);
-      // seterror(e.response);
+      seterror(e.response.data.error);
       setInterval(() => {
         seterror("")
       }, 5000);
-      // console.log(e.response)
     })
     }
     else if(status==="restaurant"){
       e.preventDefault()
       Promise.resolve(userLogin({userName:oname,password:opass})).then((res)=>{
         console.log(res);
-        {localStorage.setItem("token",res.data.token)}
         localStorage.setItem("user", JSON.stringify(res.data.details))
         localStorage.setItem("restaurant",JSON.stringify(res.data.result)) 
         localStorage.setItem("token",res.data.token)
@@ -100,14 +97,14 @@ export default function Login() {
           setTimeout(() => {
             seterror("")
           }, 5000);
-          console.log(e.response)
+          console.log(e.response.data.error)
         })
       }).catch((e)=>{
         seterror(e.response.data.error);
         setInterval(() => {
           seterror("")
         }, 5000);
-        console.log(e.response)
+        console.log(e.response.data.error)
       })
 
     }

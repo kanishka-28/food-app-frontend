@@ -102,14 +102,14 @@ export default function Signup() {
         status: status
       }
       Promise.resolve(signupApi(credentials)).then((res)=>{
-        console.log(res);
+        // console.log(res);
         localStorage.setItem("token", res.data.token)
         setloggedIn(true)
         setuser(res.data.details)
         setOpen(false)
         window.location.reload();
       }).catch((e)=>{
-        console.log(e.response);
+        // console.log(e.response);
         seterror(e.response.data.error);
         setTimeout(() => {
           seterror("")
@@ -142,7 +142,6 @@ export default function Signup() {
           setuser(res2.data.details)
           setOpen(false)
           window.location.reload();
-          // history.push()
         }).catch((e)=>{
           console.log(e.response);
         })

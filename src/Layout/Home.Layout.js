@@ -28,10 +28,7 @@ export default function HomeLayout(props) {
       }
       <div className="container mx-auto lg:px-20">
         {props.children}
-
       </div>
-
-
     </>
   )
 }
